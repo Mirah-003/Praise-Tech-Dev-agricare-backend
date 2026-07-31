@@ -21,7 +21,7 @@ def get_ai_response(farmer, message_text):
     
     """
     
-    raw_key = os.environ.get("AI_API_KEY", "")
+    raw_key = os.environ.get("AI_API_KEY") or os.environ.get("AGRICARE_API_KEY", "")
     api_key = raw_key.strip().replace('\r', '').replace('\n', '')
 
     if not api_key:
