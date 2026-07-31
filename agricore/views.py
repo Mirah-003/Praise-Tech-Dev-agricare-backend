@@ -79,7 +79,7 @@ def get_ai_response(farmer, message_text):
             continue
 
         
-    return "Our AI assistant is currently busy. A vet will respond shortly.", False
+    return "Our AI assistant is currently experiencing a high volume of queries. We have securely logged your issue and are activating the offline backup.", False
 
 class WhatsAppWebhookView(APIView):
     """
