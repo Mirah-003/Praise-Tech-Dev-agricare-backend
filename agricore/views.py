@@ -31,7 +31,7 @@ def get_ai_response(farmer, message_text):
     masked_key = f"{api_key[:4]}...{api_key[-4:]}" if len(api_key) > 8 else "INVALID_KEY"
     print(f"SECURE LOG: API Key successfully verified and loaded (Active Key: {masked_key})")
 
-    url = os.environ.get("AI_ENGINE_URL", "https://web-production-0a25d.up.railway.app/generateContent")
+    url = os.environ.get("AI_ENGINE_URL", "https://mirah003-agricare-ai-api.hf.space/generateContent")
 
     headers = {
         "X-API-Key": api_key,
