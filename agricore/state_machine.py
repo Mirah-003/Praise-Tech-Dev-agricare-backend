@@ -84,11 +84,16 @@ def process_message(farmer, incoming_msg, message_type="text", ai_func=None):
 
     # Global interrupt handling
     if msg_lower in ['menu', 'home', 'start']:
-        farmer.conversation_state = STATE_MAIN_MENU
-        farmer.save()
-        return [create_text_message("What would you like to do today?"), 
-                create_list_message("Select an option below:", "Menu", "Options", 
-                ["Health Check", "Reminders", "Alerts", "Dashboard", "Weather", "Ask a Question"])]
+        if farmer.is_onboarded:
+            farmer.conversation_state = STATE_MAIN_MENU
+            farmer.save()
+            return [create_text_message("What would you like to do today?"), 
+                    create_list_message("Select an option below:", "Menu", "Options", 
+                    ["Health Check", "Reminders", "Alerts", "Dashboard", "Weather", "Ask a Question"])]
+        else:
+            farmer.conversation_state = STATE_WELCOME
+            farmer.save()
+            # Force them into onboarding
 
     # State processing
     if state == STATE_WELCOME:

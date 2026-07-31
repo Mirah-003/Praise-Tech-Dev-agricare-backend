@@ -38,8 +38,17 @@ def get_ai_response(farmer, message_text):
         "Content-Type": "application/json"
     }
 
+    context_msg = (
+        f"Context - Farmer Name: {farmer.name or 'Unknown'}, "
+        f"Bird Type: {farmer.bird_type or 'Unknown'}, "
+        f"Bird Age: {farmer.bird_age or 'Unknown'}, "
+        f"Flock Size: {farmer.flock_size or 'Unknown'}, "
+        f"Location: {farmer.location or 'Unknown'}.\n\n"
+        f"User's Question: {message_text}"
+    )
+
     payload = {
-        "query": message_text
+        "query": context_msg
     }
 
 
@@ -157,9 +166,7 @@ class WhatsAppWebhookView(APIView):
         if created or not farmer.name:
             if profile_name:
                 farmer.name = profile_name
-                farmer.is_onboarded = True
                 farmer.save()
-                print(f" PROFILE UPDATE: Implicitly onboarded '{profile_name}' based on WhatsApp profile data!")  
         
         # Log Farmer's Message (FR-01: History Retention)
         Conversation.objects.create(
