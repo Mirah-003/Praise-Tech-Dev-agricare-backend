@@ -88,48 +88,49 @@ class WhatsAppWebhookView(APIView):
     """
 
     @swagger_auto_schema(
-        operation_description="Send a mock WhatsApp message to the backend to test the diagnostic pipeline.",
+        operation_description="Meta WhatsApp Cloud API Webhook Receiver. Processes incoming JSON messages and sends AI response.",
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
-            required=['From', 'Body'],
+            required=['entry'],
             properties={
-                'From': openapi.Schema(
-                    type=openapi.TYPE_STRING, 
-                    description="The sender's phone number prefixed with country code.",
-                    example="whatsapp:+2349161784554"
-                ),
-                'Body': openapi.Schema(
-                    type=openapi.TYPE_STRING, 
-                    description="The raw poultry clinical symptoms query message from the farmer.",
-                    example="My birds have green diarrhea and watery eyes."
-                ),
-                'ProfileName': openapi.Schema(
-                    type=openapi.TYPE_STRING, 
-                    description="The WhatsApp profile display name of the user.",
-                    example="Praise Evesho"
-                ),
-            },
+                'entry': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Schema(type=openapi.TYPE_OBJECT))
+            }
         ),
         responses={
-            200: openapi.Response(
-                description="Valid TwiML XML document back to Twilio gateway",
-                examples={
-                    "application/xml": (
-                        '<?xml version="1.0" encoding="UTF-8"?>\n'
-                        '<Response>\n'
-                        '    <Message>Diagnostic insights text...</Message>\n'
-                        '</Response>'
-                    )
-                }
-            )
+            200: openapi.Response(description="Webhook processed successfully")
         }
     )
     def post(self, request):
-        # print("DEBUG DATA: ", request.data)
-        # Parse incoming data from twilio format 
-        from_number = request.data.get('From', '').replace('whatsapp:', '')
-        incoming_msg = request.data.get('Body', '')
-        profile_name = request.data.get('ProfileName', '')
+        # Meta WhatsApp Cloud API sends JSON payloads
+        body = request.data
+
+        # Check if this is a WhatsApp status update or an actual message
+        try:
+            entry = body.get('entry', [])[0]
+            changes = entry.get('changes', [])[0]
+            value = changes.get('value', {})
+            
+            # If there are no messages, it might be a status update (delivered, read)
+            if 'messages' not in value:
+                return Response({"status": "ignored"}, status=status.HTTP_200_OK)
+
+            message_obj = value['messages'][0]
+            from_number = message_obj.get('from')
+            
+            # Text messages have 'text' dict
+            if 'text' in message_obj:
+                incoming_msg = message_obj['text'].get('body', '')
+            else:
+                incoming_msg = "[Unsupported message type]"
+
+            # Extract profile name if available
+            contacts = value.get('contacts', [])
+            profile_name = ""
+            if contacts:
+                profile_name = contacts[0].get('profile', {}).get('name', '')
+
+        except (IndexError, KeyError, TypeError):
+            return Response({"error": "Invalid payload structure"}, status=status.HTTP_400_BAD_REQUEST)
 
         if not from_number or not incoming_msg:
             return Response({"error": "Missing message or sender"}, status=status.HTTP_400_BAD_REQUEST)
@@ -145,6 +146,7 @@ class WhatsAppWebhookView(APIView):
                 farmer.is_onboarded = True
                 farmer.save()
                 print(f" PROFILE UPDATE: Implicitly onboarded '{profile_name}' based on WhatsApp profile data!")  
+        
         # log Farmer's Message (FR-01: History Retention)
         Conversation.objects.create(
             farmer=farmer,
@@ -174,13 +176,35 @@ class WhatsAppWebhookView(APIView):
             sender_type='AI'
         )
 
-        # Deliver response back to farmer via TwiML (the XML format Twilio uses to reply to messages)
-        response_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
-        <Response>
-            <Message>{ai_text}</Message>
-        </Response>"""
+        # Deliver response back to farmer via Meta WhatsApp API
+        access_token = os.environ.get("WHATSAPP_TOKEN", "")
+        phone_number_id = os.environ.get("WHATSAPP_PHONE_ID", "")
+        
+        if not access_token or not phone_number_id:
+            print("ERROR: WHATSAPP_TOKEN or WHATSAPP_PHONE_ID not set. Cannot reply.")
+            return Response({"status": "processed, but unable to reply (missing credentials)"}, status=status.HTTP_200_OK)
 
-        return HttpResponse(response_xml, content_type="application/xml")
+        meta_url = f"https://graph.facebook.com/v19.0/{phone_number_id}/messages"
+        headers = {
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "messaging_product": "whatsapp",
+            "to": from_number,
+            "type": "text",
+            "text": {"body": ai_text}
+        }
+        
+        try:
+            resp = requests.post(meta_url, headers=headers, json=payload, timeout=10)
+            if resp.status_code not in (200, 201):
+                print(f"ERROR: Failed to send WhatsApp message. Meta responded: {resp.text}")
+        except Exception as e:
+            print(f"ERROR: Network failure sending to Meta API: {e}")
+
+        # Meta requires a 200 OK response immediately to acknowledge receipt
+        return Response({"status": "success"}, status=status.HTTP_200_OK)
     
     @swagger_auto_schema(
         operation_description="Required verification endpoint for external Webhook setup. Validates secret tokens.",
