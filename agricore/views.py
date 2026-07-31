@@ -177,7 +177,7 @@ class WhatsAppWebhookView(APIView):
         )
 
         # Deliver response back to farmer via Meta WhatsApp API
-        access_token = os.environ.get("WHATSAPP_TOKEN", "")
+        access_token = os.environ.get("WHATSAPP_TOKEN") or os.environ.get("META_WHATSAPP_TOKEN", "")
         phone_number_id = os.environ.get("WHATSAPP_PHONE_ID", "")
         
         if not access_token or not phone_number_id:
