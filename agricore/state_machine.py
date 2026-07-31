@@ -97,14 +97,21 @@ def process_message(farmer, incoming_msg, message_type="text", ai_func=None):
 
     # State processing
     if state == STATE_WELCOME:
-        if msg_lower in ["i'm a farmer", "i'm a veterinarian"]:
+        if msg_lower == "skip setup":
+            farmer.is_onboarded = True
+            farmer.conversation_state = STATE_MAIN_MENU
+            farmer.save()
+            return [create_text_message("What would you like to do today?"), 
+                    create_list_message("Select an option below:", "Menu", "Options", 
+                    ["Health Check", "Reminders", "Alerts", "Dashboard", "Weather", "Ask a Question"])]
+        elif msg_lower in ["i'm a farmer", "i'm a veterinarian"]:
             farmer.role = "Farmer" if "farmer" in msg_lower else "Veterinarian"
             farmer.conversation_state = STATE_ASK_NAME
             farmer.save()
             return [create_text_message("What's your name?")]
         else:
             return [create_text_message("👋 Hello! Welcome to AGRICARE.\n\nI'm your AI poultry assistant.\nI can help you with poultry health, disease diagnosis, farm management and emergency support.\n\nTo get started, tell me who you are."), 
-                    create_button_message("Choose your role:", ["I'm a Farmer", "I'm a Veterinarian"])]
+                    create_button_message("Choose your role:", ["I'm a Farmer", "I'm a Veterinarian", "Skip Setup"])]
             
     elif state == STATE_ASK_NAME:
         farmer.name = incoming_msg
