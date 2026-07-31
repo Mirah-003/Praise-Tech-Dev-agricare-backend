@@ -90,6 +90,8 @@ def get_ai_response(farmer, message_text):
         
     return "Our AI assistant is currently experiencing a high volume of queries. We have securely logged your issue and are activating the offline backup.", False
 
+from twilio.rest import Client
+
 class WhatsAppWebhookView(APIView):
     """
     FR-01: WhatsApp Conversational Advisory Interface.
@@ -97,71 +99,37 @@ class WhatsAppWebhookView(APIView):
     """
 
     @swagger_auto_schema(
-        operation_description="Meta WhatsApp Cloud API Webhook Receiver. Processes incoming JSON messages and sends AI response.",
-        request_body=openapi.Schema(
-            type=openapi.TYPE_OBJECT,
-            required=['entry'],
-            properties={
-                'entry': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Schema(type=openapi.TYPE_OBJECT))
-            }
-        ),
+        operation_description="Twilio WhatsApp API Webhook Receiver. Processes incoming messages.",
         responses={
             200: openapi.Response(description="Webhook processed successfully")
         }
     )
     def post(self, request):
-        # Meta WhatsApp Cloud API sends JSON payloads
+        # Twilio sends form-encoded data
         body = request.data
-
-        # Check if this is a WhatsApp status update or an actual message
-        try:
-            entry = body.get('entry', [])[0]
-            changes = entry.get('changes', [])[0]
-            value = changes.get('value', {})
-            
-            # If there are no messages, it might be a status update (delivered, read)
-            if 'messages' not in value:
-                return Response({"status": "ignored"}, status=status.HTTP_200_OK)
-
-            message_obj = value['messages'][0]
-            from_number = message_obj.get('from')
-            
-            # Text messages have 'text' dict, interactive messages have 'interactive'
-            if 'text' in message_obj:
-                incoming_msg = message_obj['text'].get('body', '')
-                msg_type = "text"
-            elif 'interactive' in message_obj:
-                interactive = message_obj['interactive']
-                if interactive.get('type') == 'button_reply':
-                    incoming_msg = interactive['button_reply'].get('title', '')
-                elif interactive.get('type') == 'list_reply':
-                    incoming_msg = interactive['list_reply'].get('title', '')
-                else:
-                    incoming_msg = ""
-                msg_type = "text"
-            elif 'image' in message_obj:
-                incoming_msg = "[Image Uploaded]"
-                msg_type = "image"
-            else:
-                incoming_msg = "[Unsupported message type]"
-                msg_type = "unknown"
-
-            # Extract profile name if available
-            contacts = value.get('contacts', [])
-            profile_name = ""
-            if contacts:
-                profile_name = contacts[0].get('profile', {}).get('name', '')
-
-        except (IndexError, KeyError, TypeError):
-            return Response({"error": "Invalid payload structure"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        incoming_msg = body.get('Body', '').strip()
+        from_number = body.get('From', '')
+        profile_name = body.get('ProfileName', '')
+        num_media = int(body.get('NumMedia', '0'))
+        
+        # Determine message type
+        if num_media > 0:
+            incoming_msg = "[Image Uploaded]"
+            msg_type = "image"
+        else:
+            msg_type = "text"
 
         if not from_number or not incoming_msg:
             return Response({"error": "Missing message or sender"}, status=status.HTTP_400_BAD_REQUEST)
-        
-        print(f"SECURE LOG: Webhook Received from phone: {from_number} (Sender Profile Name: '{profile_name}')")  
+            
+        # Strip "whatsapp:" if present in the from_number for internal storage, but keep it for replies
+        db_phone = from_number.replace('whatsapp:', '')
+
+        print(f"SECURE LOG: Webhook Received from phone: {db_phone} (Sender Profile Name: '{profile_name}')")  
 
         # get / create farmer (FR-11: Implicit onboarding) 
-        farmer, created = Farmer.objects.get_or_create(phone_number=from_number)
+        farmer, created = Farmer.objects.get_or_create(phone_number=db_phone)
 
         if created or not farmer.name:
             if profile_name:
@@ -180,94 +148,38 @@ class WhatsAppWebhookView(APIView):
         # We pass get_ai_response into the state machine for the Ask a Question state
         payloads_to_send = process_message(farmer, incoming_msg, message_type=msg_type, ai_func=get_ai_response)
 
-        # Deliver response(s) back to farmer via Meta WhatsApp API
-        access_token = os.environ.get("WHATSAPP_TOKEN") or os.environ.get("META_WHATSAPP_TOKEN", "")
-        phone_number_id = os.environ.get("WHATSAPP_PHONE_ID", "")
+        # Deliver response(s) back to farmer via Twilio WhatsApp API
+        account_sid = os.environ.get("TWILIO_ACCOUNT_SID")
+        auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
+        twilio_number = os.environ.get("TWILIO_WHATSAPP_NUMBER")
         
-        if not access_token or not phone_number_id:
-            print("ERROR: WHATSAPP_TOKEN or WHATSAPP_PHONE_ID not set. Cannot reply.")
+        if not account_sid or not auth_token or not twilio_number:
+            print("ERROR: Twilio credentials not set. Cannot reply.")
             return Response({"status": "processed, but unable to reply (missing credentials)"}, status=status.HTTP_200_OK)
 
-        meta_url = f"https://graph.facebook.com/v19.0/{phone_number_id}/messages"
-        headers = {
-            "Authorization": f"Bearer {access_token}",
-            "Content-Type": "application/json"
-        }
+        client = Client(account_sid, auth_token)
 
         # Send all payloads sequentially
         for partial_payload in payloads_to_send:
-            full_payload = {
-                "messaging_product": "whatsapp",
-                "to": from_number,
-                **partial_payload
-            }
+            # Twilio doesn't use the JSON payload format, we just send text
+            out_msg = partial_payload.get("text", {}).get("body", "[Text Message]")
+            
             try:
-                resp = requests.post(meta_url, headers=headers, json=full_payload, timeout=10)
-                if resp.status_code not in (200, 201):
-                    print(f"ERROR: Failed to send WhatsApp message. Meta responded: {resp.text}")
+                message = client.messages.create(
+                    body=out_msg,
+                    from_=twilio_number,
+                    to=from_number
+                )
+                print(f"Twilio message sent: {message.sid}")
             except Exception as e:
-                print(f"ERROR: Network failure sending to Meta API: {e}")
+                print(f"ERROR: Failed to send Twilio message: {e}")
 
             # Log AI response sent back
-            if partial_payload.get("type") == "text":
-                out_msg = partial_payload.get("text", {}).get("body", "[Text Message]")
-            else:
-                out_msg = f"[{partial_payload.get('type')} Message sent]"
-
             Conversation.objects.create(
                 farmer=farmer,
                 message_text=out_msg,
                 sender_type='AI'
             )
 
-        # Meta requires a 200 OK response immediately to acknowledge receipt
+        # Twilio requires a 200 OK response
         return Response({"status": "success"}, status=status.HTTP_200_OK)
-    
-    @swagger_auto_schema(
-        operation_description="Required verification endpoint for external Webhook setup. Validates secret tokens.",
-        manual_parameters=[
-            openapi.Parameter(
-                name='hub.mode',
-                in_=openapi.IN_QUERY,
-                type=openapi.TYPE_STRING,
-                required=True,
-                description="The webhook mode sent by the provider. Always use 'subscribe'.",
-                example="subscribe"
-            ),
-            openapi.Parameter(
-                name='hub.verify_token',
-                in_=openapi.IN_QUERY,
-                type=openapi.TYPE_STRING,
-                required=True,
-                description="The token used to verify your server ownership.",
-                example="agricare_secret_token"
-            ),
-            openapi.Parameter(
-                name='hub.challenge',
-                in_=openapi.IN_QUERY,
-                type=openapi.TYPE_STRING,
-                required=True,
-                description="A random string/number sent by the provider that your server must echo back.",
-                example="123456"
-            ),
-        ],
-        responses={
-            200: openapi.Response(
-                description="Success. Returns back the exact value sent in hub.challenge.",
-                examples={"text/plain": "123456"}
-            ),
-            403: "Verification Token Mismatch"
-        }
-    )
-    def get(self, request):
-        """
-        Required for Meta WhatsApp Business API Webhook Verification.
-        """
-        verify_token = os.environ.get("WHATSAPP_VERIFY_TOKEN", "agricare_secret_token")
-        mode = request.GET.get('hub.mode')
-        token = request.GET.get('hub.verify_token')
-        challenge = request.GET.get('hub.challenge')
-
-        if mode == 'subscribe' and token == verify_token:
-            return HttpResponse(challenge)
-        return HttpResponse("Verification Token Mismatch", status=403)

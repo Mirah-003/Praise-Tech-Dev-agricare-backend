@@ -27,58 +27,23 @@ def create_text_message(text):
     }
 
 def create_button_message(text, buttons):
-    # buttons should be a list of strings (max 3)
-    return {
-        "type": "interactive",
-        "interactive": {
-            "type": "button",
-            "body": {"text": text},
-            "action": {
-                "buttons": [
-                    {
-                        "type": "reply",
-                        "reply": {
-                            "id": f"btn_{i}",
-                            "title": btn_text[:20] # Max 20 chars
-                        }
-                    } for i, btn_text in enumerate(buttons)
-                ]
-            }
-        }
-    }
+    menu_text = text + "\n\n"
+    for i, btn_text in enumerate(buttons, 1):
+        menu_text += f"{i}. {btn_text}\n"
+    menu_text += "\n(Reply with the number)"
+    return create_text_message(menu_text.strip())
 
 def create_list_message(text, button_text, title, options):
-    return {
-        "type": "interactive",
-        "interactive": {
-            "type": "list",
-            "body": {"text": text},
-            "action": {
-                "button": button_text,
-                "sections": [
-                    {
-                        "title": title,
-                        "rows": [
-                            {
-                                "id": f"list_{i}",
-                                "title": opt[:24]
-                            } for i, opt in enumerate(options)
-                        ]
-                    }
-                ]
-            }
-        }
-    }
+    menu_text = f"{title}\n{text}\n\n"
+    for i, opt in enumerate(options, 1):
+        menu_text += f"{i}. {opt}\n"
+    menu_text += "\n(Reply with the number)"
+    return create_text_message(menu_text.strip())
 
 def get_ai_response_mock(farmer, message_text):
-    # This will be replaced by the actual get_ai_response call from views.py later if needed
-    # but we can import it at the top or pass it in.
     pass
 
 def process_message(farmer, incoming_msg, message_type="text", ai_func=None):
-    """
-    Processes incoming message based on farmer's current state and returns a list of payloads.
-    """
     state = farmer.conversation_state
     msg_lower = incoming_msg.lower().strip() if isinstance(incoming_msg, str) else ""
 
@@ -87,32 +52,36 @@ def process_message(farmer, incoming_msg, message_type="text", ai_func=None):
         if farmer.is_onboarded:
             farmer.conversation_state = STATE_MAIN_MENU
             farmer.save()
-            return [create_text_message("What would you like to do today?"), 
-                    create_list_message("Select an option below:", "Menu", "Options", 
-                    ["Health Check", "Reminders", "Alerts", "Dashboard", "Weather", "Ask a Question"])]
+            return [
+                create_text_message("What would you like to do today?"),
+                create_list_message("Select an option below:", "Menu", "Options", 
+                ["Health Check", "Reminders", "Alerts", "Dashboard", "Weather", "Ask a Question"])
+            ]
         else:
             farmer.conversation_state = STATE_WELCOME
             farmer.save()
-            # Force them into onboarding
 
-    # State processing
     if state == STATE_WELCOME:
-        if msg_lower == "skip setup":
+        if msg_lower == "skip setup" or msg_lower == "3":
             farmer.is_onboarded = True
             farmer.conversation_state = STATE_MAIN_MENU
             farmer.save()
-            return [create_text_message("What would you like to do today?"), 
-                    create_list_message("Select an option below:", "Menu", "Options", 
-                    ["Health Check", "Reminders", "Alerts", "Dashboard", "Weather", "Ask a Question"])]
-        elif msg_lower in ["i'm a farmer", "i'm a veterinarian"]:
-            farmer.role = "Farmer" if "farmer" in msg_lower else "Veterinarian"
+            return [
+                create_text_message("What would you like to do today?"),
+                create_list_message("Select an option below:", "Menu", "Options", 
+                ["Health Check", "Reminders", "Alerts", "Dashboard", "Weather", "Ask a Question"])
+            ]
+        elif msg_lower in ["i'm a farmer", "i'm a veterinarian", "1", "2"]:
+            farmer.role = "Farmer" if ("farmer" in msg_lower or msg_lower == "1") else "Veterinarian"
             farmer.conversation_state = STATE_ASK_NAME
             farmer.save()
             return [create_text_message("What's your name?")]
         else:
-            return [create_text_message("👋 Hello! Welcome to AGRICARE.\n\nI'm your AI poultry assistant.\nI can help you with poultry health, disease diagnosis, farm management and emergency support.\n\nTo get started, tell me who you are."), 
-                    create_button_message("Choose your role:", ["I'm a Farmer", "I'm a Veterinarian", "Skip Setup"])]
-            
+            return [
+                create_text_message("👋 Hello! Welcome to AGRICARE.\n\nI'm your AI poultry assistant.\nI can help you with poultry health, disease diagnosis, farm management and emergency support.\n\nTo get started, tell me who you are."),
+                create_button_message("Choose your role:", ["I'm a Farmer", "I'm a Veterinarian", "Skip Setup"])
+            ]
+
     elif state == STATE_ASK_NAME:
         farmer.name = incoming_msg
         farmer.conversation_state = STATE_ASK_BIRD_TYPE
@@ -123,8 +92,7 @@ def process_message(farmer, incoming_msg, message_type="text", ai_func=None):
         ]
         
     elif state == STATE_ASK_BIRD_TYPE:
-        if msg_lower == "let's go 🚀" or msg_lower == "let's go":
-            # Just acknowledging the previous button, repeat state
+        if msg_lower in ["let's go 🚀", "let's go", "1"]:
             pass
         elif incoming_msg:
             farmer.bird_type = incoming_msg
@@ -154,7 +122,7 @@ def process_message(farmer, incoming_msg, message_type="text", ai_func=None):
         return [create_button_message("Do you have a smart sensor installed on your farm?", ["✅ Yes (Connect IoT)", "Skip for now"])]
 
     elif state == STATE_ASK_IOT:
-        if "yes" in msg_lower:
+        if "yes" in msg_lower or msg_lower == "1":
             farmer.has_iot_device = True
             farmer.conversation_state = STATE_ASK_IOT_ID
             farmer.save()
@@ -184,28 +152,31 @@ def process_message(farmer, incoming_msg, message_type="text", ai_func=None):
             return [create_text_message("I couldn't find that device.\n\nPlease check the ID and try again.")]
 
     elif state == STATE_MAIN_MENU:
-        if "health check" in msg_lower:
+        if "health check" in msg_lower or msg_lower == "1":
             farmer.conversation_state = STATE_HEALTH_CHECK_ASK_SYMPTOMS
             farmer.save()
             return [create_button_message("Are your birds showing symptoms?", ["Yes", "No"])]
-        elif "dashboard" in msg_lower:
+        elif "dashboard" in msg_lower or msg_lower == "4":
             return [
                 create_text_message("📊 Farm Dashboard\n\n🌡 Temperature: 32°C\n💧 Humidity: 60%\n💨 Air Quality: Good\n🚰 Water Level: Normal\n\nLast Updated: Just now"),
                 create_button_message("Actions", ["Main Menu"])
             ]
-        elif "weather" in msg_lower:
+        elif "weather" in msg_lower or msg_lower == "5":
             return [
                 create_text_message("🌤 Today's Weather\n\n🌡 Temperature: 35°C\n💧 Humidity: 70%\n🌧 Rain Probability: 10%\n💨 Wind: 12 km/h"),
                 create_text_message("Recommendation:\nAvoid vaccinations today due to high temperatures."),
                 create_button_message("Next Steps", ["Main Menu"])
             ]
-        elif "ask a question" in msg_lower:
+        elif "ask a question" in msg_lower or msg_lower == "6":
             farmer.conversation_state = STATE_ASK_QUESTION
             farmer.save()
             return [create_text_message("What is your question?")]
-        elif "continue" in msg_lower:
-            return [create_list_message("What would you like to do today?", "Menu", "Options", 
-                ["Health Check", "Reminders", "Alerts", "Dashboard", "Weather", "Ask a Question"])]
+        elif "continue" in msg_lower or msg_lower == "1" or msg_lower == "main menu": # Wait, if it's main menu, handled globally
+            return [
+                create_text_message("What would you like to do today?"),
+                create_list_message("Select an option below:", "Menu", "Options", 
+                ["Health Check", "Reminders", "Alerts", "Dashboard", "Weather", "Ask a Question"])
+            ]
         else:
             return [
                 create_text_message("What would you like to do today?"),
@@ -214,15 +185,17 @@ def process_message(farmer, incoming_msg, message_type="text", ai_func=None):
             ]
 
     elif state == STATE_HEALTH_CHECK_ASK_SYMPTOMS:
-        if "yes" in msg_lower:
+        if "yes" in msg_lower or msg_lower == "1":
             farmer.conversation_state = STATE_HEALTH_CHECK_UPLOAD_PHOTO
             farmer.save()
             return [create_text_message("Please upload a clear photo of the affected birds.")]
         else:
             farmer.conversation_state = STATE_MAIN_MENU
             farmer.save()
-            return [create_text_message("Glad they are healthy! Returning to Main Menu..."),
-                    create_button_message("Main Menu", ["Continue"])]
+            return [
+                create_text_message("Glad they are healthy! Returning to Main Menu..."),
+                create_button_message("Next Steps", ["Main Menu"])
+            ]
 
     elif state == STATE_HEALTH_CHECK_UPLOAD_PHOTO:
         if message_type == "image" or "simulated_image" in msg_lower:
@@ -237,15 +210,14 @@ def process_message(farmer, incoming_msg, message_type="text", ai_func=None):
             return [create_text_message("Please upload a photo so I can assist you better. If you can't, type 'menu' to go back.")]
 
     elif state == STATE_HEALTH_CHECK_TREATMENT_PLAN:
-        if "view treatment plan" in msg_lower:
+        if "view treatment plan" in msg_lower or msg_lower == "1":
             farmer.conversation_state = STATE_CONSULTATION_RATING
             farmer.save()
             return [
                 create_text_message("Treatment Plan:\n\n• Separate affected birds immediately.\n• Administer Amprolium in drinking water for 5-7 days.\n• Ensure litter is dry and well-ventilated.\n• Clean and disinfect waterers daily."),
                 create_button_message("Would you like to speak to a veterinarian?", ["Talk to a Vet", "Back to Menu"])
             ]
-        elif "talk to a vet" in msg_lower:
-            # Here we could assign a Vet or create a health case. Let's create a generic prompt.
+        elif "talk to a vet" in msg_lower or msg_lower == "2":
             farmer.conversation_state = STATE_CONSULTATION_RATING
             farmer.save()
             return [
@@ -255,10 +227,10 @@ def process_message(farmer, incoming_msg, message_type="text", ai_func=None):
         else:
             farmer.conversation_state = STATE_MAIN_MENU
             farmer.save()
-            return [create_button_message("Main Menu", ["Continue"])]
+            return [create_button_message("Next Steps", ["Main Menu"])]
 
     elif state == STATE_CONSULTATION_RATING:
-        if "rate" in msg_lower:
+        if "rate" in msg_lower or msg_lower == "1":
             return [create_text_message("How was your experience with Dr. Smith? (Reply with 1-5 stars)")]
         elif incoming_msg.isdigit() and 1 <= int(incoming_msg) <= 5:
             farmer.conversation_state = STATE_CONSULTATION_COMMENT
