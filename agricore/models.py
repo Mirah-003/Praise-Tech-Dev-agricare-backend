@@ -19,6 +19,16 @@ class Farmer(models.Model):
     flock_size = models.IntegerField(default=0, help_text="Number of birds in the poultry form")
     location = models.CharField(max_length=255, null=True, blank=True)
     is_onboarded = models.BooleanField(default=False)
+    
+    # State machine and new onboarding fields
+    conversation_state = models.CharField(max_length=50, default='WELCOME')
+    role = models.CharField(max_length=50, null=True, blank=True)
+    bird_type = models.CharField(max_length=100, null=True, blank=True)
+    bird_age = models.CharField(max_length=100, null=True, blank=True)
+    has_iot_device = models.BooleanField(default=False)
+    iot_device_id = models.CharField(max_length=100, null=True, blank=True)
+    current_vet_consultation_id = models.IntegerField(null=True, blank=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

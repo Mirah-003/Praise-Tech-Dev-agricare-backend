@@ -117,11 +117,25 @@ class WhatsAppWebhookView(APIView):
             message_obj = value['messages'][0]
             from_number = message_obj.get('from')
             
-            # Text messages have 'text' dict
+            # Text messages have 'text' dict, interactive messages have 'interactive'
             if 'text' in message_obj:
                 incoming_msg = message_obj['text'].get('body', '')
+                msg_type = "text"
+            elif 'interactive' in message_obj:
+                interactive = message_obj['interactive']
+                if interactive.get('type') == 'button_reply':
+                    incoming_msg = interactive['button_reply'].get('title', '')
+                elif interactive.get('type') == 'list_reply':
+                    incoming_msg = interactive['list_reply'].get('title', '')
+                else:
+                    incoming_msg = ""
+                msg_type = "text"
+            elif 'image' in message_obj:
+                incoming_msg = "[Image Uploaded]"
+                msg_type = "image"
             else:
                 incoming_msg = "[Unsupported message type]"
+                msg_type = "unknown"
 
             # Extract profile name if available
             contacts = value.get('contacts', [])
@@ -147,36 +161,19 @@ class WhatsAppWebhookView(APIView):
                 farmer.save()
                 print(f" PROFILE UPDATE: Implicitly onboarded '{profile_name}' based on WhatsApp profile data!")  
         
-        # log Farmer's Message (FR-01: History Retention)
+        # Log Farmer's Message (FR-01: History Retention)
         Conversation.objects.create(
             farmer=farmer,
             message_text=incoming_msg,
             sender_type='Farmer'
         )
 
-        # Get Diagnostic advice from Agricare AI
-        ai_text, is_high_risk = get_ai_response(farmer, incoming_msg)
+        from .state_machine import process_message
 
-        # FR-07 (Automatic High risk Triage & HITL Escalation)
-        if is_high_risk:
-            HealthCase.objects.get_or_create(
-                farmer=farmer,
-                status='Pending',
-                defaults={
-                    'symptoms_summary': incoming_msg,
-                    'ai_preliminary_diagnosis': ai_text,
-                    'severity_score': 0.95
-                }
-            )
+        # We pass get_ai_response into the state machine for the Ask a Question state
+        payloads_to_send = process_message(farmer, incoming_msg, message_type=msg_type, ai_func=get_ai_response)
 
-        # log ai response 
-        Conversation.objects.create(
-            farmer=farmer,
-            message_text=ai_text,
-            sender_type='AI'
-        )
-
-        # Deliver response back to farmer via Meta WhatsApp API
+        # Deliver response(s) back to farmer via Meta WhatsApp API
         access_token = os.environ.get("WHATSAPP_TOKEN") or os.environ.get("META_WHATSAPP_TOKEN", "")
         phone_number_id = os.environ.get("WHATSAPP_PHONE_ID", "")
         
@@ -189,19 +186,32 @@ class WhatsAppWebhookView(APIView):
             "Authorization": f"Bearer {access_token}",
             "Content-Type": "application/json"
         }
-        payload = {
-            "messaging_product": "whatsapp",
-            "to": from_number,
-            "type": "text",
-            "text": {"body": ai_text}
-        }
-        
-        try:
-            resp = requests.post(meta_url, headers=headers, json=payload, timeout=10)
-            if resp.status_code not in (200, 201):
-                print(f"ERROR: Failed to send WhatsApp message. Meta responded: {resp.text}")
-        except Exception as e:
-            print(f"ERROR: Network failure sending to Meta API: {e}")
+
+        # Send all payloads sequentially
+        for partial_payload in payloads_to_send:
+            full_payload = {
+                "messaging_product": "whatsapp",
+                "to": from_number,
+                **partial_payload
+            }
+            try:
+                resp = requests.post(meta_url, headers=headers, json=full_payload, timeout=10)
+                if resp.status_code not in (200, 201):
+                    print(f"ERROR: Failed to send WhatsApp message. Meta responded: {resp.text}")
+            except Exception as e:
+                print(f"ERROR: Network failure sending to Meta API: {e}")
+
+            # Log AI response sent back
+            if partial_payload.get("type") == "text":
+                out_msg = partial_payload.get("text", {}).get("body", "[Text Message]")
+            else:
+                out_msg = f"[{partial_payload.get('type')} Message sent]"
+
+            Conversation.objects.create(
+                farmer=farmer,
+                message_text=out_msg,
+                sender_type='AI'
+            )
 
         # Meta requires a 200 OK response immediately to acknowledge receipt
         return Response({"status": "success"}, status=status.HTTP_200_OK)
