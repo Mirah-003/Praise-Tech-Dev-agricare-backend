@@ -50,3 +50,7 @@ python manage.py migrate
 python manage.py runserver
 
 Once the server is running, you can view the complete interactive API layout by navigating to http://127.0.0.1:8000/swagger/ in your web browser.
+
+---
+
+*Note: This backend is a fork of the original [Praise-Tech-Dev/agricare-backend](https://github.com/Praise-Tech-Dev/agricare-backend) repository. Full credit for the core backend architecture goes to the original development team.*
