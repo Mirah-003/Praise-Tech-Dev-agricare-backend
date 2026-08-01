@@ -1,0 +1,2067 @@
+[
+    {
+        "id": "newcastle",
+        "names": {
+            "en": "Newcastle Disease",
+            "ha": "Cutar Newcastle",
+            "yo": "Àrùn Newcastle",
+            "ig": "Ọrịa Newcastle",
+            "pcm": "Newcastle Disease",
+            "sw": "Kideri (Mdondo)"
+        },
+        "severity": "CRITICAL",
+        "symptoms": {
+            "en": [
+                "stargazing",
+                "coughing",
+                "gasping for air",
+                "neck twisting",
+                "nervous signs",
+                "head turning",
+                "green poop",
+                "loss of appetite",
+                "drooping wings",
+                "running nose",
+                "green diarrhea",
+                "sudden death",
+                "gasping",
+                "looking at the sky",
+                "twisted neck",
+                "unvaccinated",
+                "no vaccine",
+                "all ages",
+                "adults",
+                "chicks",
+                "not vaccinated"
+            ],
+            "ha": [
+                "haki",
+                "karkacewar wuya",
+                "zawo mai kore",
+                "mutuwar kwatsam",
+                "rashin cin abinci",
+                "fukafukan da suka fadi",
+                "tari",
+                "alamun jijiya"
+            ],
+            "yo": [
+                "mímí líle",
+                "ọrùn yíyípo",
+                "ìgbẹ́ àwọ̀ ewé",
+                "ikú òjijì",
+                "àìfẹ́ oúnjẹ",
+                "ìyẹ́ rírẹlẹ̀",
+                "ikọ́",
+                "àmì ìṣan"
+            ],
+            "ig": [
+                "iku ume",
+                "olu gbagọrọ agbagọ",
+                "afọ ọsịsa akwụkwọ ndụ",
+                "ọnwụ mberede",
+                "enweghị agụụ",
+                "nku dara ada",
+                "ụkwara",
+                "ihe ịrịba ama akwara"
+            ],
+            "pcm": [
+                "stargazing",
+                "green shit",
+                "coughing",
+                "neck twist",
+                "no appetite",
+                "neck twisting",
+                "breathing hard",
+                "nervous signs",
+                "looking at the sky",
+                "gasping for air",
+                "running nose",
+                "green poop",
+                "wings drop",
+                "sudden death",
+                "head turning",
+                "cough",
+                "unvaccinated",
+                "no vaccine",
+                "all ages",
+                "adults",
+                "chicks",
+                "not vaccinated"
+            ],
+            "sw": [
+                "kupumua kwa shida",
+                "shingo kupinda",
+                "kuhara kijani",
+                "kifo cha ghafla"
+            ]
+        },
+        "advice": {
+            "en": "VACCINATE at Day 1 (eye drop) and Week 3-4 (LaSota in water). Isolate sick birds IMMEDIATELY. Call a veterinarian TODAY. Local remedy: Soak cut Tagiri (Christmas melon) in their drinking water to help prevent viral spread.",
+            "ha": "YI RIGAKAFI a Rana 1 (a ido) da Mako 3-4 (LaSota a ruwa). Ware tsuntsaye marasa lafiya YANZU. Kira likitan dabbobi YAU. Maganin gargajiya: A jika yanyankan Tagiri a cikin ruwan shan su don rigakafin yaduwar kwayar cutar.",
+            "yo": "Ṣe AJESARA ní Ọjọ́ kìíní (ojú) àti Ọ̀sẹ̀ kẹta si kẹrin (LaSota nínú omi). Ya àwọn adìẹ aláìsàn sọ́tọ̀ BÁYÌÍ. Pe dókítà ẹran LÓNÌÍ. Oògùn ìbílẹ̀: Rẹ Tagiri (Kérésìmesì mẹ́lọ̀nù) tí a ti bẹ́ sínú omi mímu wọn láti dènà ìtànkálẹ̀ fáírọ́ọ̀sì.",
+            "ig": "GBAA ỌGWỤ MGBOCHI n'Ụbọchị 1 (anya) na Izuụka 3-4 (LaSota na mmiri). Kewapụ ọkụkọ na-arịa ọrịa UGBUA. Kpọọ dibia anụmanụ TAA. Ọgwụ ọdịnala: Tụnye Tagiri (Christmas melon) ebiribi n'ime mmiri ọñụñụ ha iji gbochie mgbasa nje.",
+            "pcm": "VACCINATE for Day 1 (eye drop) and Week 3-4 (LaSota inside water). Separate sick birds NOW NOW. Call vet doctor TODAY. Local remedy: Cut Tagiri (Christmas melon) soak am for dia drinking water to help stop the virus.",
+            "sw": "CHANJA siku ya 1."
+        },
+        "escalation_words": [
+            "gasping",
+            "haki",
+            "twisted neck",
+            "karkacewar wuya",
+            "green diarrhea",
+            "zawo mai kore",
+            "sudden death",
+            "mutuwar kwatsam",
+            "nervous",
+            "jijiya",
+            "iku ume",
+            "olu gbagọrọ",
+            "ọnwụ mberede",
+            "coughing",
+            "tari"
+        ]
+    },
+    {
+        "id": "avian_influenza",
+        "names": {
+            "en": "Avian Influenza (Bird Flu)",
+            "ha": "Murar Tsuntsaye (Bird Flu)",
+            "yo": "Àrùn Àfòìmọ̀ (Bird Flu)",
+            "ig": "Ọrịa Nnụnụ (Bird Flu)",
+            "pcm": "Bird Flu",
+            "sw": "Mafua ya Ndege"
+        },
+        "severity": "CRITICAL",
+        "symptoms": {
+            "en": [
+                "sudden death without signs",
+                "swollen head",
+                "blue comb/wattles",
+                "blood-tinged discharge",
+                "severe depression",
+                "drop in egg production",
+                "all ages",
+                "sudden death",
+                "flock dead",
+                "many dead"
+            ],
+            "ha": [
+                "mutuwar kwatsam ba tare da alamomi ba",
+                "kumburin kai",
+                "tsefe/ gemu mai shuɗi",
+                "majina mai ɗauke da jini",
+                "baƙin ciki mai tsanani",
+                "raguwar ƙwai"
+            ],
+            "yo": [
+                "ikú òjijì láìsí àmì",
+                "wíwú orí",
+                "àwọ̀ búlúù",
+                "ìmú tó ní ẹ̀jẹ̀",
+                "ìbànújẹ́ gidi",
+                "ìdínkù ẹyin"
+            ],
+            "ig": [
+                "ọnwụ mberede na-enweghị ihe ịrịba ama",
+                "isi fụrụ akpụ",
+                "mbo na-acha anụnụ anụnụ",
+                "ọbara na-esi n'imi apụta",
+                "oke ịda mbà",
+                "mbelata ịtọ akwa"
+            ],
+            "pcm": [
+                "sudden death without signs",
+                "head swell",
+                "blue comb",
+                "blood from nose",
+                "serious depression",
+                "egg production drop",
+                "all ages",
+                "sudden death",
+                "flock dead",
+                "many dead"
+            ],
+            "sw": [
+                "kifo cha ghafla",
+                "kichwa kuvimba"
+            ]
+        },
+        "advice": {
+            "en": "🚨 REPORT TO AUTHORITIES. Do not touch sick or dead birds. Strict biosecurity. Call a government vet immediately.",
+            "ha": "🚨 KAIS DA HUKUMA. Kada ka taba tsuntsaye marasa lafiya ko matattu. Tsauraran matakan tsaro. Kira likitan dabbobi na gwamnati cikin gaggawa.",
+            "yo": "🚨 JÁBỌ̀ FÚN ÀWỌN ALÁṢẸ. Má ṣe fọwọ́ kan ẹyẹ aláìsàn tàbí òkú. Ìṣọ́ra tó lágbára. Pe dókítà ìjọba ní kíákíá.",
+            "ig": "🚨 KPỌTỤRỤ NDỊ ỌCHỊCHỊ. Emetụla nnụnụ na-arịa ọrịa ma ọ bụ nwụrụ anwụ aka. Nchekwa siri ike. Kpọọ dibia gọọmenti ozugbo.",
+            "pcm": "🚨 REPORT TO GOVERNMENT. No touch sick or dead birds. Tight biosecurity. Call government vet immediate.",
+            "sw": "TOA TAARIFA KWA MAMLAKA."
+        },
+        "escalation_words": [
+            "sudden death",
+            "mutuwar kwatsam",
+            "blood",
+            "jini",
+            "blue comb",
+            "swollen head",
+            "kumburin kai",
+            "head swell",
+            "bird flu"
+        ]
+    },
+    {
+        "id": "coccidiosis",
+        "names": {
+            "en": "Coccidiosis",
+            "ha": "Coccidiosis",
+            "yo": "Àrùn Coccidiosis",
+            "ig": "Ọrịa Coccidiosis",
+            "pcm": "Coccidiosis",
+            "sw": "Coccidiosis"
+        },
+        "severity": "HIGH",
+        "symptoms": {
+            "en": [
+                "weight loss",
+                "bloody stool",
+                "ruffled feathers",
+                "pale comb",
+                "stooling blood",
+                "pupu blood",
+                "bloody droppings",
+                "reduced feed intake",
+                "shitting blood",
+                "blood for stool",
+                "dem dey shit blood",
+                "huddling",
+                "shit blood",
+                "red poop",
+                "weakness",
+                "3 weeks",
+                "4 weeks",
+                "5 weeks",
+                "6 weeks",
+                "young birds",
+                "blood in poop"
+            ],
+            "ha": [
+                "zawo mai jini",
+                "rauni",
+                "kodan tsefe",
+                "rage cin abinci",
+                "taruwa",
+                "rasa nauyi",
+                "fuka-fukan da suka rude"
+            ],
+            "yo": [
+                "ìgbẹ́ ẹlẹjẹ",
+                "àìlera",
+                "àwọ̀ funfun",
+                "dídín oúnjẹ kù",
+                "kíkóra jọ",
+                "pípàdánù ìwọ̀n",
+                "ìyẹ́ tó dàrú"
+            ],
+            "ig": [
+                "nsị ọbara",
+                "adịghị ike",
+                "mbo icha",
+                "mbelata iri nri",
+                "ịgbakọta",
+                "ifelata ibu",
+                "ábụbà akpaghasị"
+            ],
+            "pcm": [
+                "no dey chop well",
+                "bloody stool",
+                "stooling blood",
+                "pale comb",
+                "pupu blood",
+                "shitting blood",
+                "weak body",
+                "blood for stool",
+                "dem dey shit blood",
+                "bloody shit",
+                "shit blood",
+                "red poop",
+                "weight loss",
+                "feathers scatter",
+                "dem gather together",
+                "3 weeks",
+                "4 weeks",
+                "5 weeks",
+                "6 weeks",
+                "young birds",
+                "blood in poop"
+            ],
+            "sw": [
+                "bloody droppings",
+                "weakness",
+                "pale comb",
+                "reduced feed intake",
+                "huddling",
+                "weight loss",
+                "ruffled feathers"
+            ]
+        },
+        "advice": {
+            "en": "Buy AMPROLIUM from vet shop. Give 1g/2L water for 5-7 days. Keep litter dry. Use anticoccidial in feed for prevention. Local remedy: Squeeze Bitter leaf (Vernonia amygdalina) or Aloe Vera into their drinking water to aid gut health.",
+            "ha": "Sayi AMPROLIUM daga shagon likitan dabbobi. Ba gram 1/lita 2 na ruwa tsawon kwanaki 5-7. Kiyaye kwanciya bushe. Yi amfani da anticoccidial a abinci don rigakafi. Maganin gargajiya: A matse Shuwaka ko Aloe Vera a cikin ruwan shan su don inganta lafiyar hanji.",
+            "yo": "Ra AMPROLIUM láti ilé ìtajà oògùn. Fún gram 1/lítà omi 2 fún ọjọ́ 5-7. Pa ibùsùn gbẹ. Lo anticoccidial nínú oúnjẹ fún ìdènà. Oògùn ìbílẹ̀: Fún ewúrò tàbí Aloe Vera sínú omi mímu wọn láti jẹ́ kí ìfun wọn wà ní ìlera.",
+            "ig": "Zụta AMPROLIUM n'ụlọ ahịa ọgwụ. Nye gram 1/lita mmiri 2 maka ụbọchị 5-7. Debe ihe mkpofu akọrọ. Jiri anticoccidial na nri maka mgbochi. Ọgwụ ọdịnala: Pịkọta Onugbu ma ọ bụ Aloe Vera n'ime mmiri ọñụñụ ha iji nyere ahụike eriri afọ aka.",
+            "pcm": "Buy AMPROLIUM from vet shop. Give 1g/2L water for 5-7 days. Keep floor dry. Use anticoccidial in feed to prevent. Local remedy: Squeeze Bitter leaf or Aloe Vera put for dia water to help wash dia belle.",
+            "sw": "Buy AMPROLIUM from vet shop. Give 1g/2L water for 5-7 days. Keep litter dry. Use anticoccidial in feed for prevention."
+        },
+        "escalation_words": [
+            "bloody droppings",
+            "zawo mai jini",
+            "bloody shit",
+            "jini",
+            "ọbara",
+            "weight loss",
+            "rasa nauyi"
+        ]
+    },
+    {
+        "id": "gumboro",
+        "names": {
+            "en": "Gumboro Disease (IBD)",
+            "ha": "Cutar Gumboro",
+            "yo": "Àrùn Gumboro",
+            "ig": "Ọrịa Gumboro",
+            "pcm": "Gumboro",
+            "sw": "Gumboro Disease (IBD)"
+        },
+        "severity": "HIGH",
+        "symptoms": {
+            "en": [
+                "ruffled feathers",
+                "white diarrhea",
+                "pecking at vent",
+                "depression",
+                "vent pecking",
+                "shivering",
+                "white watery diarrhea",
+                "trembling",
+                "sudden drop in appetite",
+                "dem dey shake",
+                "watery diarrhea",
+                "dehydration",
+                "3 weeks",
+                "4 weeks",
+                "5 weeks",
+                "6 weeks",
+                "young birds",
+                "watery poop"
+            ],
+            "ha": [
+                "zawo mai ruwa farin",
+                "baƙin ciki",
+                "fuka-fukan da suka rude",
+                "rashin ruwa",
+                "tsuntsu tsuntsu",
+                "raguwar cin abinci kwatsam"
+            ],
+            "yo": [
+                "ìgbẹ́ omi funfun",
+                "ìbànújẹ́",
+                "ìyẹ́ tó dàrú",
+                "àìní omi ara",
+                "jíjẹ ẹ̀yìn",
+                "àìfẹ́ oúnjẹ lójijì"
+            ],
+            "ig": [
+                "nsị ọcha mmiri mmiri",
+                "ịda mbà",
+                "ábụbà akpaghasị",
+                "akpọnwụ mmiri",
+                "ịtụ n'imi",
+                "mbelata agụụ na mberede"
+            ],
+            "pcm": [
+                "white watery shit",
+                "appetite drop suddenly",
+                "ruffled feathers",
+                "white diarrhea",
+                "pecking at vent",
+                "depression",
+                "shivering",
+                "dem dey shake",
+                "trembling",
+                "dem dey peck back",
+                "watery diarrhea",
+                "feathers scatter",
+                "body dry",
+                "3 weeks",
+                "4 weeks",
+                "5 weeks",
+                "6 weeks",
+                "young birds",
+                "watery poop"
+            ],
+            "sw": [
+                "white watery diarrhea",
+                "depression",
+                "ruffled feathers",
+                "dehydration",
+                "vent pecking",
+                "sudden drop in appetite"
+            ]
+        },
+        "advice": {
+            "en": "VACCINATE chicks at Day 14-21 with intermediate strain. Isolate sick birds. Support with electrolytes in water. There is no cure; prevent by strict biosecurity.",
+            "ha": "YI RIGAKAFIN tsuntsaye a rana 14-21 da sinadarin tsaka-tsaki. Ware marasa lafiya. Ba su ruwa mai wutan lantarki. Babu magani; rigakafi ta hanyar tsauraran matakan tsaro.",
+            "yo": "Ṣe ÀJẸSÁRA fún àwọn ọmọ adìẹ ní ọjọ́ 14-21 pẹ̀lú irú agbègbè. Ya àwọn aláìsàn sọ́tọ̀. Fún wọn ní omi amọ́nà. Kò sí ìwòsàn; dènà pẹ̀lú ìṣọ́ra tó lágbára.",
+            "ig": "GBAA ỌGWỤ MGBOCHI ụmụ ọkụkọ n'ụbọchị 14-21 jiri ụdị etiti. Kewapụ ndị na-arịa ọrịa. Nye ha mmiri nwere electrolyte. Enweghị ọgwụgwọ; gbochie site na nchekwa siri ike.",
+            "pcm": "VACCINATE chicks for Day 14-21 with intermediate strain. Separate sick ones. Give dem water with electrolytes. No cure; prevent by strict biosecurity.",
+            "sw": "VACCINATE chicks at Day 14-21 with intermediate strain. Isolate sick birds. Support with electrolytes in water. There is no cure; prevent by strict biosecurity."
+        },
+        "escalation_words": [
+            "white watery",
+            "farin ruwa",
+            "dehydration",
+            "rashin ruwa",
+            "vent pecking",
+            "tsuntsu tsuntsu",
+            "body dry"
+        ]
+    },
+    {
+        "id": "mareks",
+        "names": {
+            "en": "Marek's Disease",
+            "ha": "Cutar Marek",
+            "yo": "Àrùn Marek",
+            "ig": "Ọrịa Marek",
+            "pcm": "Marek's Disease",
+            "sw": "Marek's Disease"
+        },
+        "severity": "CRITICAL",
+        "symptoms": {
+            "en": [
+                "cannot stand",
+                "grey eye",
+                "dem no fit stand",
+                "one leg forward one back",
+                "blindness",
+                "enlarged nerves",
+                "breathing difficulty",
+                "falling down",
+                "weight loss",
+                "tumors in organs",
+                "paralyzed leg",
+                "paralysis of legs/wings",
+                "day old",
+                "young chicks",
+                "pullets",
+                "paralyzed"
+            ],
+            "ha": [
+                "shanyewar ƙafafu/fukafukai",
+                "girman jijiyoyi",
+                "ƙari a gabobin jiki",
+                "rasa nauyi",
+                "ido mai launin toka",
+                "wahalar numfashi"
+            ],
+            "yo": [
+                "rọ ìsájú/ìyẹ́",
+                "àwọn èyà ara tó gbòòrò",
+                "àrún nínú ẹ̀yà ara",
+                "pípàdánù ìwọ̀n",
+                "ojú àwọ̀ eérú",
+                "mímí tó ṣòro"
+            ],
+            "ig": [
+                "mkpọnwụ ụkwụ/nku",
+                "akwara okwukpo buru ibu",
+                "akpụ n'akụkụ ahụ",
+                "ifelata ibu",
+                "anya isi awọ",
+                "ike iku ume"
+            ],
+            "pcm": [
+                "swollen nerves",
+                "breathing wahala",
+                "cannot stand",
+                "grey eye",
+                "dem no fit stand",
+                "one leg forward one back",
+                "blindness",
+                "tumors inside body",
+                "paralysis of leg/wing",
+                "falling down",
+                "weight loss",
+                "paralyzed leg",
+                "day old",
+                "young chicks",
+                "pullets",
+                "paralyzed"
+            ],
+            "sw": [
+                "paralysis of legs/wings",
+                "enlarged nerves",
+                "tumors in organs",
+                "weight loss",
+                "grey eye",
+                "breathing difficulty"
+            ]
+        },
+        "advice": {
+            "en": "🚨 VACCINATE day-old chicks. There is NO treatment. Cull severely affected birds. Maintain strict hygiene.",
+            "ha": "🚨 YI RIGAKAFIN tsuntsaye a ranar farko. BABU magani. Karkashe tsuntsaye da suka kamu da tsanani. Kula da tsafta sosai.",
+            "yo": "🚨 Ṣe ÀJẸSÁRA fún àwọn ọmọ adìẹ ní ọjọ́ kìíní. KÒ SÍ ìwòsàn. Pa àwọn ẹyẹ tó ní àrùn líle. Tọ́jú ìmọ́tótó.",
+            "ig": "🚨 GBAA ỌGWỤ MGBOCHI ụmụ ọkụkọ n'ụbọchị mbụ. ENWEGHỊ ọgwụgwọ. Gbuo nnụnụ emetụtara nke ukwuu. Dowe ọcha siri ike.",
+            "pcm": "🚨 VACCINATE day-old chicks. No treatment. Kill birds wey serious. Keep strict hygiene.",
+            "sw": "🚨 VACCINATE day-old chicks. There is NO treatment. Cull severely affected birds. Maintain strict hygiene."
+        },
+        "escalation_words": [
+            "paralysis",
+            "shanyewar",
+            "tumors",
+            "ƙari",
+            "enlarged nerves",
+            "grey eye",
+            "ido mai toka"
+        ]
+    },
+    {
+        "id": "fowl_pox",
+        "names": {
+            "en": "Fowl Pox",
+            "ha": "Cutar Fowl Pox",
+            "yo": "Àrùn Fowl Pox",
+            "ig": "Ọrịa Fowl Pox",
+            "pcm": "Fowl Pox",
+            "sw": "Fowl Pox"
+        },
+        "severity": "MEDIUM",
+        "symptoms": {
+            "en": [
+                "pimples on comb",
+                "scabs",
+                "scabs on skin",
+                "reduced egg production",
+                "pimple for head",
+                "swollen eyes",
+                "black spots on face",
+                "loss of appetite",
+                "sores in mouth",
+                "warts on face",
+                "wart-like bumps on comb/wattles",
+                "all ages",
+                "mosquitoes",
+                "rainy season"
+            ],
+            "ha": [
+                "kumburi kamar wart akan tsefe/gemu",
+                "raunuka a baki",
+                "rage yawan ƙwai",
+                "rashin cin abinci",
+                "ƙuƙumma a fata"
+            ],
+            "yo": [
+                "àpá olóòórùn lórí àwò ẹyẹ",
+                "ọgbẹ́ nínú ẹnu",
+                "dídín ẹyin kù",
+                "àìfẹ́ oúnjẹ",
+                "èèpo lórí awọ"
+            ],
+            "ig": [
+                "mkomi yiri wart n'elu mbo/agba",
+                "ọnya n'ọnụ",
+                "mbelata ịtọ akwa",
+                "enweghị agụụ",
+                "akpụ n'akpụkpọ"
+            ],
+            "pcm": [
+                "pimples on comb",
+                "scabs",
+                "scabs for skin",
+                "bumps like wart for comb",
+                "pimple for head",
+                "swollen eyes",
+                "no appetite",
+                "black spots on face",
+                "egg reduce",
+                "warts on face",
+                "sore for mouth",
+                "all ages",
+                "mosquitoes",
+                "rainy season"
+            ],
+            "sw": [
+                "wart-like bumps on comb/wattles",
+                "sores in mouth",
+                "reduced egg production",
+                "loss of appetite",
+                "scabs on skin"
+            ]
+        },
+        "advice": {
+            "en": "VACCINATE with fowl pox vaccine. No specific treatment. Provide soft food and clean water. Birds usually recover in 2-3 weeks. Local remedy: Apply Palm oil mixed with ash on the scabs to soothe and dry them up.",
+            "ha": "YI RIGAKAFI da maganin fowl pox. Babu takamaiman magani. Ba da abinci mai laushi da ruwa mai tsabta. Tsuntsaye sukan warke cikin makonni 2-3. Maganin gargajiya: A shafa Man ja da toka akan kurajen don su bushe.",
+            "yo": "Ṣe ÀJẸSÁRA pẹ̀lú oògùn fowl pox. Kò sí oògùn pàtó. Fún oúnjẹ rírọ̀ àti omi mímọ́. Ẹyẹ sábà máa ń wò láàárín ọ̀sẹ̀ 2-3. Oògùn ìbílẹ̀: Pa epo pupa tí a pò mọ́ eérú sára egbò náà láti jẹ́ kó gbẹ.",
+            "ig": "GBAA ỌGWỤ MGBOCHI fowl pox. Enweghị ọgwụgwọ pụrụ iche. Nye nri dị nro na mmiri dị ọcha. Nnụnụ na-agbake n'ime izu 2-3. Ọgwụ ọdịnala: Tee mmanụ nkwụ ejikọtara na ntụ n'elu ọnya ahụ iji mee ka ọ kọọ.",
+            "pcm": "VACCINATE with fowl pox vaccine. No special medicine. Give soft food and clean water. Birds fit recover in 2-3 weeks. Local remedy: Rub Palm oil wey dem mix with ash for the wound to make am dry.",
+            "sw": "VACCINATE with fowl pox vaccine. No specific treatment. Provide soft food and clean water. Birds usually recover in 2-3 weeks."
+        },
+        "escalation_words": []
+    },
+    {
+        "id": "infectious_bronchitis",
+        "names": {
+            "en": "Infectious Bronchitis",
+            "ha": "Cutar Ciwon Mashako mai Yaduwa",
+            "yo": "Àrùn Ọ̀fun Àkóràn",
+            "ig": "Ọrịa Ọrịa Mkpụrụume Na-efe Efe",
+            "pcm": "Bronchitis",
+            "sw": "Infectious Bronchitis"
+        },
+        "severity": "HIGH",
+        "symptoms": {
+            "en": [
+                "nasal discharge",
+                "depression",
+                "misshapen eggs",
+                "coughing",
+                "snicking",
+                "crinkled eggs",
+                "wet eyes",
+                "sneezing",
+                "soft shell eggs",
+                "watery eyes",
+                "breathing sound",
+                "drop in egg production",
+                "layers",
+                "drop in eggs",
+                "pullets",
+                "cold weather"
+            ],
+            "ha": [
+                "tari",
+                "atishawa",
+                "majina daga hanci",
+                "idanu masu ruwa",
+                "raguwar ƙwai",
+                "ƙwai marasa siffa",
+                "baƙin ciki"
+            ],
+            "yo": [
+                "ikọ́",
+                "sísìn",
+                "ìmú ṣíṣàn",
+                "ojú omi",
+                "ìdínkù ẹyin",
+                "ẹyin àìrísí",
+                "ìbànújẹ́"
+            ],
+            "ig": [
+                "ụkwara",
+                "uzere",
+                "imi na-agbapụta",
+                "anya mmiri",
+                "mbelata ịtọ akwa",
+                "akwa ezighị ezi",
+                "ịda mbà"
+            ],
+            "pcm": [
+                "depression",
+                "eggs no shape well",
+                "sneeze",
+                "snicking",
+                "nose dey run",
+                "crinkled eggs",
+                "egg reduce",
+                "sneezing",
+                "wet eyes",
+                "soft shell eggs",
+                "watery eyes",
+                "breathing sound",
+                "cough",
+                "layers",
+                "drop in eggs",
+                "pullets",
+                "cold weather"
+            ],
+            "sw": [
+                "coughing",
+                "sneezing",
+                "nasal discharge",
+                "watery eyes",
+                "drop in egg production",
+                "misshapen eggs",
+                "depression"
+            ]
+        },
+        "advice": {
+            "en": "VACCINATE with IB vaccine. No specific treatment. Provide warmth, clean water, and good ventilation. Antibiotics for secondary infections. Local remedy: Crush Garlic and Ginger into their water to boost respiratory immunity during cold weather.",
+            "ha": "YI RIGAKAFI da maganin IB. Babu takamaiman magani. Bayar da ɗumi, ruwa mai tsabta, da isasshiyar iska. Maganin rigakafi don kamuwa da cuta na biyu. Maganin gargajiya: A daka Tafarnuwa da Citta a zuba a ruwan shan su don karfafa garkuwar jiki lokacin sanyi.",
+            "yo": "Ṣe ÀJẸSÁRA pẹ̀lú oògùn IB. Kò sí oògùn pàtó. Fún ni ooru, omi mímọ́, àti àtẹgùn dáradára. Oògùn àrùn fún àkóràn kejì. Oògùn ìbílẹ̀: Gún Aáyù àti Atale sínú omi wọn láti gbé agbára ìdènà àrùn fún mími sókè lásìkò òtútù.",
+            "ig": "GBAA ỌGWỤ MGBOCHI IB. Enweghị ọgwụgwọ pụrụ iche. Nye okpomọkụ, mmiri dị ọcha, na ikuku zuru oke. Ọgwụ nje maka ọrịa nke abụọ. Ọgwụ ọdịnala: Suo Ayuu na Jinja n'ime mmiri ha iji bulie usoro ahụ ji alụso ọrịa ọgụ n'oge oyi.",
+            "pcm": "VACCINATE with IB vaccine. No special treatment. Give warmth, clean water, and good breeze. Antibiotics for secondary infections. Local remedy: Crush Garlic and Ginger put inside dia water to make dia body strong against cold.",
+            "sw": "VACCINATE with IB vaccine. No specific treatment. Provide warmth, clean water, and good ventilation. Antibiotics for secondary infections."
+        },
+        "escalation_words": [
+            "coughing",
+            "tari",
+            "sneezing",
+            "atishawa",
+            "nasal",
+            "majina",
+            "watery eyes",
+            "drop egg"
+        ]
+    },
+    {
+        "id": "fowl_cholera",
+        "names": {
+            "en": "Fowl Cholera",
+            "ha": "Cutar Kwalara ta Kaji",
+            "yo": "Àrùn Kọ́lérà Adìẹ",
+            "ig": "Ọrịa Kọlera Ọkụkọ",
+            "pcm": "Fowl Cholera",
+            "sw": "Fowl Cholera"
+        },
+        "severity": "HIGH",
+        "symptoms": {
+            "en": [
+                "swollen joints",
+                "green/yellow diarrhea",
+                "fever",
+                "purple comb",
+                "swollen wattles",
+                "difficulty breathing",
+                "plenty dead birds",
+                "blue comb",
+                "sudden death",
+                "greenish yellow diarrhea",
+                "dying very fast",
+                "cyanosis (blue comb)",
+                "adult birds",
+                "older birds",
+                "swollen comb"
+            ],
+            "ha": [
+                "mutuwar kwatsam",
+                "zazzabi",
+                "zawo kore/rawaya",
+                "kumburin gaɓoɓi",
+                "wahalar numfashi",
+                "tsefe mai shuɗi"
+            ],
+            "yo": [
+                "ikú òjijì",
+                "àìbà",
+                "ìgbẹ́ àwọ̀ ewé/yẹ́lò",
+                "wíwú oríkèé",
+                "mímí tó ṣòro",
+                "àwọ̀ búlúù"
+            ],
+            "ig": [
+                "ọnwụ mberede",
+                "ahụ ọkụ",
+                "afọ ọsịsa akwụkwọ ndụ/odo",
+                "nkpọrọ fụrụ akpụ",
+                "ike iku ume",
+                "mbo na-acha anụnụ"
+            ],
+            "pcm": [
+                "swollen joints",
+                "green/yellow shit",
+                "breathing wahala",
+                "fever",
+                "purple comb",
+                "swollen wattles",
+                "plenty dead birds",
+                "blue comb",
+                "sudden death",
+                "greenish yellow diarrhea",
+                "dying very fast",
+                "adult birds",
+                "older birds",
+                "swollen comb"
+            ],
+            "sw": [
+                "sudden death",
+                "fever",
+                "green/yellow diarrhea",
+                "swollen joints",
+                "difficulty breathing",
+                "cyanosis (blue comb)"
+            ]
+        },
+        "advice": {
+            "en": "Antibiotics (sulfonamides, tetracyclines) can treat if given early. Vaccinate in high-risk areas. Improve sanitation and biosecurity.",
+            "ha": "Maganin rigakafi (sulfonamides, tetracyclines) na iya magani idan an ba da wuri. Yi rigakafi a wurare masu haɗari. Inganta tsafta da matakan tsaro.",
+            "yo": "Oògùn àrùn (sulfonamides, tetracyclines) lè wò bí a bá fún ní àkókò. Ṣe àjẹsára ní àgbègbè eléwu. Mú ìmọ́tótó àti ìṣọ́ra dára sí i.",
+            "ig": "Ọgwụ nje (sulfonamides, tetracyclines) nwere ike ịgwọ ma ọ bụrụ na enyere n'oge. Gbaa ọgwụ mgbochi n'ebe dị ize ndụ. Mee ka ịdị ọcha na nchekwa dị mma.",
+            "pcm": "Antibiotics fit cure if you give early. Vaccinate for high-risk areas. Improve sanitation and biosecurity.",
+            "sw": "Antibiotics (sulfonamides, tetracyclines) can treat if given early. Vaccinate in high-risk areas. Improve sanitation and biosecurity."
+        },
+        "escalation_words": [
+            "sudden death",
+            "mutuwar kwatsam",
+            "blue comb",
+            "fever",
+            "zazzabi",
+            "swollen joints",
+            "kumburin gaɓoɓi"
+        ]
+    },
+    {
+        "id": "salmonellosis",
+        "names": {
+            "en": "Salmonellosis (Pullorum/Fowl Typhoid)",
+            "ha": "Cutar Salmonella (Pullorum/Typhoid)",
+            "yo": "Àrùn Salmonella (Pullorum/Typhoid)",
+            "ig": "Ọrịa Salmonella (Pullorum/Typhoid)",
+            "pcm": "Salmonella",
+            "sw": "Salmonellosis (Pullorum/Fowl Typhoid)"
+        },
+        "severity": "HIGH",
+        "symptoms": {
+            "en": [
+                "white diarrhea",
+                "depression",
+                "pasted vent",
+                "loss of appetite",
+                "feeling cold",
+                "swollen hocks",
+                "white diarrhea (pasted vent)",
+                "white paste on vent",
+                "huddling near heat",
+                "sudden death in chicks",
+                "huddling together",
+                "chicks",
+                "first week",
+                "day old",
+                "young chicks"
+            ],
+            "ha": [
+                "zawo farin (maƙale a tsuntsu)",
+                "baƙin ciki",
+                "rashin cin abinci",
+                "taruwa kusa da zafi",
+                "kumburin ƙafafu",
+                "mutuwar kwatsam a cikin 'yan tsuntsaye"
+            ],
+            "yo": [
+                "ìgbẹ́ funfun (lẹ̀gẹ́ tí a rẹ̀)",
+                "ìbànújẹ́",
+                "àìfẹ́ oúnjẹ",
+                "kíkóra jọ sẹ́gbẹ̀ẹ́ ooru",
+                "wíwú egbò",
+                "ikú òjijì nínú ọmọ adìẹ"
+            ],
+            "ig": [
+                "nsị ọcha (gbara n'akụkụ ahụ)",
+                "ịda mbà",
+                "enweghị agụụ",
+                "ịgbakọta n'akụkụ ọkụ",
+                "nkpọrọ ụkwụ fụrụ akpụ",
+                "ọnwụ mberede n'ụmụ ọkụkọ"
+            ],
+            "pcm": [
+                "dem gather near heat",
+                "depression",
+                "swollen leg joints",
+                "no appetite",
+                "sudden death for chicks",
+                "pasted vent",
+                "white shit (paste for bottom)",
+                "feeling cold",
+                "white diarrhea",
+                "white paste on vent",
+                "huddling together",
+                "chicks",
+                "first week",
+                "day old",
+                "young chicks"
+            ],
+            "sw": [
+                "white diarrhea (pasted vent)",
+                "depression",
+                "loss of appetite",
+                "huddling near heat",
+                "swollen hocks",
+                "sudden death in chicks"
+            ]
+        },
+        "advice": {
+            "en": "Antibiotics (e.g., amoxicillin) under vet guidance. Remove carrier birds. Strict sanitation. Vaccinate breeders. Local remedy: Add crushed garlic and a little apple cider vinegar to water for gut support.",
+            "ha": "Maganin rigakafi (misali, amoxicillin) a ƙarƙashin kulawar likitan dabbobi. Cire tsuntsaye masu ɗauke da cutar. Tsafta sosai. Yi rigakafin masu haihuwa. Maganin gargajiya: A kara tafarnuwa da daddawa a cikin ruwan shan su.",
+            "yo": "Oògùn àrùn (bíi amoxicillin) lábẹ́ ìtọ́sọ́nà dókítà. Yọ àwọn ẹyẹ tó ń kó àrùn. Ìmọ́tótó tó péye. Ṣe àjẹsára fún àwọn adìẹ. Oògùn ìbílẹ̀: Fi aáyù tí a gún pẹ̀lú ọtí kíkan sínú omi wọn.",
+            "ig": "Ọgwụ nje (dịka amoxicillin) n'okpuru nduzi dibia. Wepụ nnụnụ na-ebu ọrịa. Ịdị ọcha siri ike. Gbaa ọgwụ mgbochi ndị na-amụ ụmụ. Ọgwụ ọdịnala: Tinye ayuu asụrụ asụ n'ime mmiri ha.",
+            "pcm": "Antibiotics (like amoxicillin) with vet advice. Remove carrier birds. Strict sanitation. Vaccinate breeders. Local remedy: Put crushed garlic and small apple cider vinegar for water to support dia belle.",
+            "sw": "Antibiotics (e.g., amoxicillin) under vet guidance. Remove carrier birds. Strict sanitation. Vaccinate breeders."
+        },
+        "escalation_words": [
+            "sudden death chicks",
+            "white diarrhea",
+            "zawo farin",
+            "pasted vent",
+            "mutuwar kwatsam",
+            "swollen hocks"
+        ]
+    },
+    {
+        "id": "egg_drop_syndrome",
+        "names": {
+            "en": "Egg Drop Syndrome (EDS)",
+            "ha": "Ciwon Rage Ƙwai (EDS)",
+            "yo": "Àrùn Ìdínkù Ẹyin (EDS)",
+            "ig": "Ọrịa Mbelata Akwa (EDS)",
+            "pcm": "Egg Drop Syndrome",
+            "sw": "Egg Drop Syndrome (EDS)"
+        },
+        "severity": "MEDIUM",
+        "symptoms": {
+            "en": [
+                "sudden drop in egg production",
+                "thin-shelled/soft eggs",
+                "loss of shell color",
+                "watery egg whites",
+                "birds look healthy otherwise"
+            ],
+            "ha": [
+                "raguwar ƙwai kwatsam",
+                "ƙwai masu siririn ƙwanso/marasa ƙarfi",
+                "rasa launin ƙwanso",
+                "farar ƙwai mai ruwa",
+                "tsuntsaye suna da lafiya in ba haka ba"
+            ],
+            "yo": [
+                "ìdínkù ẹyin lójijì",
+                "ẹyin àìlókun/ rírọ̀",
+                "àwọ̀ ẹyin pàdánù",
+                "ẹyin olómi",
+                "àwọn ẹyẹ dàbí aláìsàn láì sí"
+            ],
+            "ig": [
+                "mbelata ịtọ akwa na mberede",
+                "akwa ndị nwere mkpo dị gịrịgịrị/nro",
+                "ifelata ụcha mkpo",
+                "akwa mmiri mmiri",
+                "nnụnụ dị ka ndị dị mma ma ọ bụghị ya"
+            ],
+            "pcm": [
+                "sudden egg drop",
+                "thin-shell eggs",
+                "shell color loss",
+                "watery egg whites",
+                "birds look healthy otherwise"
+            ],
+            "sw": [
+                "sudden drop in egg production",
+                "thin-shelled/soft eggs",
+                "loss of shell color",
+                "watery egg whites",
+                "birds look healthy otherwise"
+            ]
+        },
+        "advice": {
+            "en": "No treatment. Vaccinate pullets before laying. Biosecurity measures.",
+            "ha": "Babu magani. Yi rigakafin 'yan kaji kafin su fara yin ƙwai. Matakan tsaro.",
+            "yo": "Kò sí ìwòsàn. Ṣe àjẹsára fún àwọn adìẹ kékeré ṣáájú kíkó ẹyin. Ìṣọ́ra.",
+            "ig": "Enweghị ọgwụgwọ. Gbaa ọgwụ mgbochi ụmụ ọkụkọ tupu ha amụọ akwa. Nchekwa.",
+            "pcm": "No treatment. Vaccinate pullets before dem start lay. Biosecurity measures.",
+            "sw": "No treatment. Vaccinate pullets before laying. Biosecurity measures."
+        },
+        "escalation_words": []
+    },
+    {
+        "id": "coryza",
+        "names": {
+            "en": "Infectious Coryza",
+            "ha": "Cutar Coryza",
+            "yo": "Àrùn Coryza",
+            "ig": "Ọrịa Coryza",
+            "pcm": "Coryza",
+            "sw": "Infectious Coryza"
+        },
+        "severity": "MEDIUM",
+        "symptoms": {
+            "en": [
+                "nasal discharge",
+                "eyes closed shut",
+                "swollen face/eyes",
+                "face swell",
+                "foul breath",
+                "sticky eyelids",
+                "smelly nose",
+                "foul smelling nasal discharge",
+                "drop in egg production",
+                "swollen face"
+            ],
+            "ha": [
+                "kumburin fuska/idanu",
+                "majina daga hanci",
+                "warin baki",
+                "raguwar ƙwai",
+                "idanu masu mannewa"
+            ],
+            "yo": [
+                "wíwú ojú/ojú",
+                "ìmú ṣíṣàn",
+                "ẹnu tó ń rùn",
+                "ìdínkù ẹyin",
+                "ìpéǹpéjú tó lẹ̀ mọ́ra"
+            ],
+            "ig": [
+                "ihu na anya fụrụ akpụ",
+                "imi na-agbapụta",
+                "isi ọnụ na-esi",
+                "mbelata ịtọ akwa",
+                "nkuanya na-arapara"
+            ],
+            "pcm": [
+                "mouth dey smell",
+                "eyes closed shut",
+                "face swell",
+                "nose dey run",
+                "egg reduce",
+                "smelly nose",
+                "foul smelling nasal discharge",
+                "eyelids gum together",
+                "swollen face"
+            ],
+            "sw": [
+                "swollen face/eyes",
+                "nasal discharge",
+                "foul breath",
+                "drop in egg production",
+                "sticky eyelids"
+            ]
+        },
+        "advice": {
+            "en": "Antibiotics (sulfadimethoxine, erythromycin) under vet guidance. Isolate sick birds. Improve ventilation.",
+            "ha": "Maganin rigakafi (sulfadimethoxine, erythromycin) a ƙarƙashin kulawa. Ware marasa lafiya. Inganta iskar gida.",
+            "yo": "Oògùn àrùn (sulfadimethoxine, erythromycin) lábẹ́ ìdarí dókítà. Ya àwọn aláìsàn sọ́tọ̀. Mú àtẹgùn sunwọ̀n.",
+            "ig": "Ọgwụ nje (sulfadimethoxine, erythromycin) n'okpuru nduzi. Kewapụ ndị ọrịa. Mee ka ikuku dị mma.",
+            "pcm": "Antibiotics (sulfadimethoxine, erythromycin) with vet advice. Separate sick birds. Improve ventilation.",
+            "sw": "Antibiotics (sulfadimethoxine, erythromycin) under vet guidance. Isolate sick birds. Improve ventilation."
+        },
+        "escalation_words": []
+    },
+    {
+        "id": "mycoplasmosis",
+        "names": {
+            "en": "Mycoplasmosis (Chronic Respiratory Disease)",
+            "ha": "Cutar Mycoplasma (CRD)",
+            "yo": "Àrùn Mycoplasma (CRD)",
+            "ig": "Ọrịa Mycoplasma (CRD)",
+            "pcm": "CRD (Breathing Sickness)",
+            "sw": "Mycoplasmosis (Chronic Respiratory Disease)"
+        },
+        "severity": "MEDIUM",
+        "symptoms": {
+            "en": [
+                "coughing",
+                "sneezing",
+                "nasal discharge",
+                "foamy eyes",
+                "swollen sinuses",
+                "reduced growth"
+            ],
+            "ha": [
+                "tari",
+                "atishawa",
+                "majina daga hanci",
+                "idanu masu kumfa",
+                "kumburin sinuses",
+                "raguwar girma"
+            ],
+            "yo": [
+                "ikọ́",
+                "sísìn",
+                "ìmú ṣíṣàn",
+                "ojú fófó",
+                "wíwú sinuses",
+                "dídín ìdàgbàsókè kù"
+            ],
+            "ig": [
+                "ụkwara",
+                "uzere",
+                "imi na-agbapụta",
+                "anya nwere ụfụfụ",
+                "sinuses fụrụ akpụ",
+                "mbelata uto"
+            ],
+            "pcm": [
+                "cough",
+                "sneeze",
+                "nose run",
+                "foam for eye",
+                "face swell",
+                "growth reduce"
+            ],
+            "sw": [
+                "coughing",
+                "sneezing",
+                "nasal discharge",
+                "foamy eyes",
+                "swollen sinuses",
+                "reduced growth"
+            ]
+        },
+        "advice": {
+            "en": "Antibiotics (tylosin, doxycycline) can control. Improve air quality. Vaccination available.",
+            "ha": "Maganin rigakafi (tylosin, doxycycline) na iya sarrafawa. Inganta iskar gida. Akwai rigakafi.",
+            "yo": "Oògùn àrùn (tylosin, doxycycline) lè ṣàkóso. Mú àtẹgùn dára. Àjẹsára wà.",
+            "ig": "Ọgwụ nje (tylosin, doxycycline) nwere ike ịchịkwa. Mee ka ikuku dị mma. Ọgwụ mgbochi dị.",
+            "pcm": "Antibiotics fit control. Improve air. Vaccination dey.",
+            "sw": "Antibiotics (tylosin, doxycycline) can control. Improve air quality. Vaccination available."
+        },
+        "escalation_words": []
+    },
+    {
+        "id": "colibacillosis",
+        "names": {
+            "en": "Colibacillosis (E. coli infection)",
+            "ha": "Cutar Colibacillosis",
+            "yo": "Àrùn Colibacillosis",
+            "ig": "Ọrịa Colibacillosis",
+            "pcm": "E. coli infection",
+            "sw": "Colibacillosis (E. coli infection)"
+        },
+        "severity": "HIGH",
+        "symptoms": {
+            "en": [
+                "depression",
+                "fever",
+                "swollen abdomen",
+                "diarrhea",
+                "respiratory distress",
+                "sudden death"
+            ],
+            "ha": [
+                "baƙin ciki",
+                "zazzabi",
+                "kumburin ciki",
+                "zawo",
+                "wahalar numfashi",
+                "mutuwar kwatsam"
+            ],
+            "yo": [
+                "ìbànújẹ́",
+                "àìbà",
+                "wíwú ikùn",
+                "ìgbẹ́",
+                "mímí tó ṣòro",
+                "ikú òjijì"
+            ],
+            "ig": [
+                "ịda mbà",
+                "ahụ ọkụ",
+                "afọ fụrụ akpụ",
+                "afọ ọsịsa",
+                "ike iku ume",
+                "ọnwụ mberede"
+            ],
+            "pcm": [
+                "depression",
+                "fever",
+                "swollen belly",
+                "diarrhea",
+                "breathing wahala",
+                "sudden death"
+            ],
+            "sw": [
+                "depression",
+                "fever",
+                "swollen abdomen",
+                "diarrhea",
+                "respiratory distress",
+                "sudden death"
+            ]
+        },
+        "advice": {
+            "en": "Antibiotics under vet supervision. Improve sanitation. Provide clean water always.",
+            "ha": "Maganin rigakafi a ƙarƙashin kulawar likitan dabbobi. Inganta tsafta. Bayar da ruwa mai tsabta koyaushe.",
+            "yo": "Oògùn àrùn lábẹ́ àbójútó dókítà. Mú ìmọ́tótó dára. Fún omi mímọ́ nígbà gbogbo.",
+            "ig": "Ọgwụ nje n'okpuru nlekọta dibia. Mee ka ịdị ọcha dị mma. Nye mmiri dị ọcha mgbe niile.",
+            "pcm": "Antibiotics with vet guidance. Improve sanitation. Give clean water always.",
+            "sw": "Antibiotics under vet supervision. Improve sanitation. Provide clean water always."
+        },
+        "escalation_words": [
+            "sudden death",
+            "mutuwar kwatsam",
+            "swollen abdomen",
+            "kumburin ciki",
+            "respiratory distress"
+        ]
+    },
+    {
+        "id": "aspergillosis",
+        "names": {
+            "en": "Aspergillosis (Brooder Pneumonia)",
+            "ha": "Cutar Aspergillosis",
+            "yo": "Àrùn Aspergillosis",
+            "ig": "Ọrịa Aspergillosis",
+            "pcm": "Brooder Pneumonia",
+            "sw": "Aspergillosis (Brooder Pneumonia)"
+        },
+        "severity": "MEDIUM",
+        "symptoms": {
+            "en": [
+                "gasping",
+                "rapid breathing",
+                "loss of appetite",
+                "thirst",
+                "eye discharge",
+                "nervous signs"
+            ],
+            "ha": [
+                "haki",
+                "numfashi da sauri",
+                "rashin cin abinci",
+                "ƙishirwa",
+                "majina daga ido",
+                "alamun jijiya"
+            ],
+            "yo": [
+                "mímí líle",
+                "mímí kíákíá",
+                "àìfẹ́ oúnjẹ",
+                "òngbẹ",
+                "ìmú ojú",
+                "àmì ìṣan"
+            ],
+            "ig": [
+                "iku ume",
+                "iku ume ọsọ",
+                "enweghị agụụ",
+                "akpịrị ịkpọ nkụ",
+                "anya na-agbapụta",
+                "ihe ịrịba ama akwara"
+            ],
+            "pcm": [
+                "gasping",
+                "fast breathing",
+                "no appetite",
+                "thirsty",
+                "eye discharge",
+                "nervous signs"
+            ],
+            "sw": [
+                "gasping",
+                "rapid breathing",
+                "loss of appetite",
+                "thirst",
+                "eye discharge",
+                "nervous signs"
+            ]
+        },
+        "advice": {
+            "en": "Remove moldy litter/feed. Improve ventilation. Antifungal treatment (under vet). No specific cure.",
+            "ha": "Cire kwanciya/abinci mai gurbata. Inganta iska. Maganin rigakafin fungi (a ƙarƙashin kulawa). Babu takamaiman magani.",
+            "yo": "Yọ ìbùsùn/oúnjẹ tó bàjẹ́. Mú àtẹgùn dára. Oògùn antifungal (lábẹ́ ìtọ́sọ́nà). Kò sí ìwòsàn pàtó.",
+            "ig": "Wepụ ihe mkpofu/nri ebu. Mee ka ikuku dị mma. Ọgwụ antifungal (n'okpuru nduzi). Enweghị ọgwụgwọ pụrụ iche.",
+            "pcm": "Remove moldy litter/food. Improve ventilation. Antifungal treatment (with vet). No special cure.",
+            "sw": "Remove moldy litter/feed. Improve ventilation. Antifungal treatment (under vet). No specific cure."
+        },
+        "escalation_words": [
+            "gasping",
+            "haki",
+            "rapid breathing",
+            "numfashi da sauri"
+        ]
+    },
+    {
+        "id": "worms",
+        "names": {
+            "en": "Internal Parasites (Worms)",
+            "ha": "Tsutsotsin Ciki",
+            "yo": "Àwọn Kòkòrò Inú",
+            "ig": "Ikpuru Ime",
+            "pcm": "Worms",
+            "sw": "Internal Parasites (Worms)"
+        },
+        "severity": "MEDIUM",
+        "symptoms": {
+            "en": [
+                "pale comb",
+                "reduced egg production",
+                "worms in shit",
+                "long worms in poop",
+                "losing weight",
+                "diarrhea",
+                "worms in droppings",
+                "potbelly",
+                "weight loss",
+                "thin birds"
+            ],
+            "ha": [
+                "rasa nauyi",
+                "kodan tsefe",
+                "zawo",
+                "tsutsotsi a cikin najasa",
+                "raguwar ƙwai",
+                "tumbin ciki"
+            ],
+            "yo": [
+                "pípàdánù ìwọ̀n",
+                "àwọ̀ funfun",
+                "ìgbẹ́",
+                "kòkòrò nínú ìgbẹ́",
+                "dídín ẹyin kù",
+                "ikùn wíwú"
+            ],
+            "ig": [
+                "ifelata ibu",
+                "mbo icha",
+                "afọ ọsịsa",
+                "ikpuru n'ime nsị",
+                "mbelata ịtọ akwa",
+                "afọ mkpọmkpọ"
+            ],
+            "pcm": [
+                "pale comb",
+                "worms in shit",
+                "long worms in poop",
+                "losing weight",
+                "diarrhea",
+                "worms inside shit",
+                "pot belly",
+                "egg reduce",
+                "weight loss",
+                "thin birds"
+            ],
+            "sw": [
+                "weight loss",
+                "pale comb",
+                "diarrhea",
+                "worms in droppings",
+                "reduced egg production",
+                "potbelly"
+            ]
+        },
+        "advice": {
+            "en": "Deworm with levamisole, piperazine, or albendazole every 2-3 months. Keep litter dry. Rotate dewormers.",
+            "ha": "Yi allurar tsutsotsi da levamisole, piperazine, ko albendazole kowane wata 2-3. Kiyaye kwanciya bushe. Canza magungunan tsutsotsi.",
+            "yo": "Pa kòkòrò pẹ̀lú levamisole, piperazine, tàbí albendazole ní gbogbo oṣù 2-3. Pa ibùsùn gbẹ. Yí oògùn àpòòkọ̀.",
+            "ig": "Wepụ ikpuru site na levamisole, piperazine, ma ọ bụ albendazole kwa ọnwa 2-3. Debe ihe mkpofu akọrọ. Gbanwee ọgwụ ikpuru.",
+            "pcm": "Deworm with levamisole, piperazine, or albendazole every 2-3 months. Keep floor dry. Change dewormer.",
+            "sw": "Deworm with levamisole, piperazine, or albendazole every 2-3 months. Keep litter dry. Rotate dewormers."
+        },
+        "escalation_words": []
+    },
+    {
+        "id": "necrotic_enteritis",
+        "names": {
+            "en": "Necrotic Enteritis",
+            "ha": "Ciwon Cikin Kaji (Necrotic)",
+            "yo": "Arun Ifun (Necrotic Enteritis)",
+            "ig": "Ọrịa Afọ (Necrotic Enteritis)",
+            "pcm": "Rotten Belle Disease (Necrotic Enteritis)"
+        },
+        "severity": "HIGH",
+        "symptoms": {
+            "en": [
+                "dark feces",
+                "foul smelling diarrhea",
+                "smelly poop",
+                "sudden death",
+                "ruffled feathers",
+                "dark stool"
+            ],
+            "ha": [
+                "zawo mai wari",
+                "kashin baƙi",
+                "mutuwar kwatsam"
+            ],
+            "yo": [
+                "ìgbẹ́ dídú",
+                "ìgbẹ́ tó ń rùn",
+                "ikú òjijì"
+            ],
+            "ig": [
+                "nsị ojii",
+                "nsị na-esi ísì",
+                "ọnwụ mberede"
+            ],
+            "pcm": [
+                "black shit",
+                "smelly shit",
+                "dem just dey die",
+                "dark poop"
+            ]
+        },
+        "escalation_words": [
+            "sudden death",
+            "dying fast",
+            "black diarrhea",
+            "smelly stool"
+        ],
+        "advice": {
+            "en": "Use antibiotics like Amoxicillin or Bacitracin in drinking water for 5-7 days. Reduce fishmeal/carbohydrates in feed slightly. Consult a vet immediately.",
+            "ha": "Yi amfani da maganin kwayoyin cuta (antibiotics) kamar Amoxicillin a cikin ruwan sha na kwanaki 5-7. Kira likitan dabbobi.",
+            "yo": "Lo oògùn apakòkòrò bíi Amoxicillin sínú omi fún ọjọ́ 5-7. Pe dókítà ẹran.",
+            "ig": "Tinye ọgwụ nje (Amoxicillin) n'ime mmiri ruo ụbọchị 5-7. Kpọọ dọkịta anụmanụ.",
+            "pcm": "Give dem Amoxicillin or Bacitracin for inside dem water for 5-7 days. Call your vet doctor fast fast."
+        }
+    },
+    {
+        "id": "fowl_typhoid",
+        "names": {
+            "en": "Fowl Typhoid",
+            "ha": "Cutar Fowl Typhoid",
+            "yo": "Àrùn Fowl Typhoid",
+            "ig": "Ọrịa Fowl Typhoid",
+            "pcm": "Fowl Typhoid"
+        },
+        "severity": "CRITICAL",
+        "symptoms": {
+            "en": [
+                "yellow diarrhea",
+                "bronze liver",
+                "pale comb",
+                "sudden death",
+                "greenish diarrhea"
+            ],
+            "ha": [
+                "zawo mai rawaya",
+                "hanta mai launi tagulla",
+                "mutuwar kwatsam"
+            ],
+            "yo": [
+                "ìgbẹ́ ofeefee",
+                "ẹ̀dọ̀ rírù",
+                "ikú òjijì"
+            ],
+            "ig": [
+                "nsị odo odo",
+                "imeju bronze",
+                "ọnwụ mberede"
+            ],
+            "pcm": [
+                "yellow shit",
+                "green shit",
+                "pale comb",
+                "dem dey die plenty"
+            ]
+        },
+        "escalation_words": [
+            "sudden death",
+            "dying",
+            "yellow diarrhea"
+        ],
+        "advice": {
+            "en": "Isolate sick birds immediately. This is highly contagious and often fatal. Treat flock with Enrofloxacin or Sulfa drugs. Destroy dead birds properly.",
+            "ha": "Ware kaji masu lafiya yanzu. Wannan cuta tana yaduwa da sauri kuma tana kashewa. Bada maganin Enrofloxacin. Kona matattun kaji.",
+            "yo": "Ya àwọn adìẹ tó ń ṣàìsàn sọ́tọ̀. Lo oògùn Enrofloxacin tàbí Sulfa fún gbogbo wọn. Dókun àwọn adìẹ tó ti kú.",
+            "ig": "Kewapụ ụmụ nnụnụ na-arịa ọrịa ozugbo. Nye ha ọgwụ Enrofloxacin. Kpochapụ ụmụ nnụnụ nwụrụ anwụ nke ọma.",
+            "pcm": "Separate di sick ones quick! Na deadly and catching catching disease. Give dem Enrofloxacin medicine and burn/bury di dead ones."
+        }
+    },
+    {
+        "id": "pullorum_disease",
+        "names": {
+            "en": "Pullorum Disease",
+            "ha": "Cutar Pullorum",
+            "yo": "Àrùn Pullorum",
+            "ig": "Ọrịa Pullorum",
+            "pcm": "Pullorum (White Shit) Disease"
+        },
+        "severity": "CRITICAL",
+        "symptoms": {
+            "en": [
+                "white paste on vent",
+                "pasted vent",
+                "white diarrhea in chicks",
+                "huddling together",
+                "cheeping",
+                "weak chicks"
+            ],
+            "ha": [
+                "kashin fari a duwawu",
+                "cui-cui da yawa",
+                "zawo mai fari a kananan kaji"
+            ],
+            "yo": [
+                "ìgbẹ́ funfun lára ìdí",
+                "kíkígbe adìẹ kékeré",
+                "àwọn ọmọ adìẹ tó rẹ̀"
+            ],
+            "ig": [
+                "nsị ọcha na gburugburu ike",
+                "ịkwa ákwá",
+                "ụmụ nnụnụ na-esighi ike"
+            ],
+            "pcm": [
+                "white shit cover di yansh",
+                "white shit for small chicks",
+                "chicks dey cry plenty"
+            ]
+        },
+        "escalation_words": [
+            "pasted vent",
+            "chicks dying",
+            "white diarrhea"
+        ],
+        "advice": {
+            "en": "Extremely lethal in chicks. Remove and isolate sick chicks. Provide warmth and treat with broad-spectrum antibiotics (like Tetracycline). Maintain strict hygiene.",
+            "ha": "Tana kashe kananan kaji da yawa. Cire masu ciwo yanzu. Bada dumi da maganin Tetracycline.",
+            "yo": "Ó léwu gan-an fún àwọn ọmọ adìẹ. Mú àwọn tó ń ṣàìsàn kúrò. Pèsè ìgbóná àti oògùn Tetracycline.",
+            "ig": "Ọ na-egbu ụmụ nnụnụ nke ukwuu. Kewapụ ndị na-arịa ọrịa. Nye ha okpomọkụ na ọgwụ Tetracycline.",
+            "pcm": "Dis one dey wipe out small chicks! Commot di sick ones, make di place warm, and give dem Tetracycline inside water."
+        }
+    },
+    {
+        "id": "bumblefoot",
+        "names": {
+            "en": "Bumblefoot",
+            "ha": "Kumburin Kafa (Bumblefoot)",
+            "yo": "Kókó Ẹsẹ̀ (Bumblefoot)",
+            "ig": "Ọzịza Ụkwụ (Bumblefoot)",
+            "pcm": "Bumblefoot (Swollen Leg)"
+        },
+        "severity": "MEDIUM",
+        "symptoms": {
+            "en": [
+                "swollen foot",
+                "black scab on footpad",
+                "limping",
+                "lameness",
+                "swollen feet",
+                "black spot on foot"
+            ],
+            "ha": [
+                "kumburin kafa",
+                "bakin ciwo a tafin kafa",
+                "gurgunta"
+            ],
+            "yo": [
+                "ẹsẹ̀ wíwú",
+                "eépa dúdú ní abẹ́ ẹsẹ̀",
+                "arọ"
+            ],
+            "ig": [
+                "ụkwụ aza aza",
+                "eriri ojii n'okpuru ụkwụ",
+                "ịnyụ ụkwụ"
+            ],
+            "pcm": [
+                "swollen leg",
+                "black mark for foot",
+                "bird dey limp",
+                "cannot walk well"
+            ]
+        },
+        "escalation_words": [
+            "cannot walk",
+            "black scab"
+        ],
+        "advice": {
+            "en": "This is a staph infection. Soak the affected foot in warm Epsom salt water, clean thoroughly, remove the core/scab if possible, apply iodine or antibiotic spray, and bandage it. Improve litter quality.",
+            "ha": "Ciwon cutar kwayoyin halitta ne. Jiƙa ƙafar a cikin ruwan gishiri mai dumi, wanke sosai, saka maganin iodine, sannan a nannade ƙafar. Canza kashin gidan kajin.",
+            "yo": "Omi tàbí oògùn apakòkòrò ni ó fà á. Fi ẹsẹ̀ rẹ̀ sínú omi iyọ̀ tó gbóná díẹ̀, fọ̀ ọ́ dáadáa, fi iodine tàbí oògùn sí i, kí o sì wé e. Jẹ́ kí abẹ́ ilé wọn mọ́.",
+            "ig": "Nke a bụ ọrịa nje. Tinye ụkwụ ahụ n'ime mmiri nnu na-ekpo ọkụ, sachaa ya nke ọma, tinye iodine ma ọ bụ ọgwụ, wee kechie ya. Mee ka ebe ha bi dị ọcha.",
+            "pcm": "Soak di leg for warm water wey get salt, wash am clean, spray am with iodine or antibiotic spray, den tie am. Make sure say dia beddings dey clean and dry always."
+        }
+    },
+    {
+        "id": "avian_encephalomyelitis",
+        "names": {
+            "en": "Avian Encephalomyelitis (Epidemic Tremor)",
+            "ha": "Cutar Rawanin Kaji",
+            "yo": "Àrùn Wíwárìrì Adìẹ",
+            "ig": "Ọrịa Ịma Jiji",
+            "pcm": "Shaking Sickness (Epidemic Tremor)"
+        },
+        "severity": "HIGH",
+        "symptoms": {
+            "en": [
+                "tremors",
+                "shaking",
+                "head shaking",
+                "paralysis in chicks",
+                "cannot stand",
+                "sitting on hocks"
+            ],
+            "ha": [
+                "karkarwa",
+                "rawanin kai",
+                "gurguncewa a kananan kaji",
+                "zama a kan guiwa"
+            ],
+            "yo": [
+                "wíwárìrì",
+                "gbígbọn orí",
+                "arọ fún àwọn ọmọ adìẹ",
+                "jíjókòó lórí eékún"
+            ],
+            "ig": [
+                "ịma jiji",
+                "ịfụkọta isi",
+                "ịnwụ ụkwụ na ụmụ nnụnụ",
+                "ịnọdụ n'ikpere"
+            ],
+            "pcm": [
+                "body dey shake",
+                "head dey shake",
+                "chicks dem no fit stand",
+                "dem dey fall"
+            ]
+        },
+        "escalation_words": [
+            "paralysis",
+            "shaking",
+            "sitting on hocks"
+        ],
+        "advice": {
+            "en": "Viral disease with no cure. Cull severely affected chicks to prevent spread. Ensure adequate vitamins (especially Vitamin E/Selenium) to help remaining birds recover. Vaccination of breeders is the only prevention.",
+            "ha": "Cutar kwayoyin virus ce wacce bata da magani. Cire kajin da suka kamu sosai don hana yaduwa. Bada sinadarin Vitamin E a cikin ruwa.",
+            "yo": "Àrùn fáírọ́ọ̀sì ni, kò ní oògùn. Mú àwọn adìẹ tó ń ṣàìsàn kúrò kí ó má baà ràn mọ́ àwọn yòókù. Fún wọn ní Fítámì (Vitamin E) sínú omi.",
+            "ig": "Ọrịa virus a enweghị ọgwụgwọ. Wepụ ụmụ nnụnụ na-arịa ọrịa ka o wee ghara ịgbasa. Nye ha Vitamin E.",
+            "pcm": "Dis virus no get medicine. Kill/commot di ones wey don paralyse make e no spread. Give di remaining ones strong multivitamins (Vitamin E and Selenium) inside dia water."
+        }
+    },
+    {
+        "id": "fatty_liver",
+        "names": {
+            "en": "Fatty Liver Hemorrhagic Syndrome",
+            "ha": "Ciwon Hanta da Jini",
+            "yo": "Àrùn Ẹ̀dọ̀ Ọlọ́ràá",
+            "ig": "Ọrịa Imeju na Ọbara",
+            "pcm": "Fatty Liver Disease"
+        },
+        "severity": "HIGH",
+        "symptoms": {
+            "en": [
+                "sudden death in fat layers",
+                "pale comb",
+                "overweight hens",
+                "drop in egg production",
+                "liver bleeding"
+            ],
+            "ha": [
+                "mutuwar kwatsam a kaji masu kiba",
+                "fari a kai",
+                "kaji masu kiba sosai",
+                "raguwar kwan kaji"
+            ],
+            "yo": [
+                "ikú òjijì fún àwọn adìẹ tó sanra",
+                "funfun lórí",
+                "àwọn adìẹ tó sanra jù",
+                "dídínkù nínú dídá ẹyin"
+            ],
+            "ig": [
+                "ọnwụ mberede na nnụnụ gbara abụba",
+                "isi na-acha ọcha",
+                "nnụnụ gbara abụba nke ukwuu",
+                "mbelata na imepụta akwa"
+            ],
+            "pcm": [
+                "fat chickens dey die",
+                "pale comb",
+                "egg drop",
+                "plenty fat"
+            ]
+        },
+        "escalation_words": [
+            "sudden death",
+            "fat birds"
+        ],
+        "advice": {
+            "en": "Common in caged laying hens that are overweight. Replace part of carbohydrates with fat in feed. Add lipotropic agents (Choline chloride, Vitamin E, Selenium, Vitamin B12) to diet. Reduce stress.",
+            "ha": "Tana samun kaji masu kwan da ke cikin keji masu kiba. Canza abinci mai rage kiba. Bada sinadarin Choline da Vitamin E.",
+            "yo": "Ó wọ́pọ̀ lára àwọn adìẹ tí a ń tọ́jú sínú àgò tí wọ́n sì sanra. Din títàn sínú oúnjẹ kù. Fún wọn ní Choline àti Vitamin E.",
+            "ig": "Ọ na-ahụkarị na nnụnụ ndị na-eyi akwa nọ n'ime ogige nwere abụba. Belata ihe nri na-eme ka ibu. Nye ha Choline na Vitamin E.",
+            "pcm": "Di birds dey too fat so dia liver burst. Reduce wetin dey make dem fat inside feed. Add Choline, Vitamin E and Selenium inside dia water or feed. Give dem liver tonic."
+        }
+    },
+    {
+        "id": "botulism",
+        "names": {
+            "en": "Botulism (Limberneck)",
+            "ha": "Cutar Sanyin Wuya (Botulism)",
+            "yo": "Àrùn Ọrùn Rírọ (Botulism)",
+            "ig": "Ọrịa Olu Ịdà (Botulism)",
+            "pcm": "Limberneck (Botulism)"
+        },
+        "severity": "CRITICAL",
+        "symptoms": {
+            "en": [
+                "limp neck",
+                "neck lying on the floor",
+                "paralysis",
+                "cannot stand",
+                "feathers pulling out easily",
+                "loose feathers"
+            ],
+            "ha": [
+                "wuyan da ya saki",
+                "wuya a kasa",
+                "gurguncewa",
+                "gashin da ke zubewa da sauri"
+            ],
+            "yo": [
+                "ọrùn rírọ",
+                "ọrùn tó sọ̀ kalẹ̀",
+                "arọ",
+                "ìyẹ́ tó ń yọ tìrọ̀rùn"
+            ],
+            "ig": [
+                "olu na-adịghị ike",
+                "olu dị n'ala",
+                "ịnwụ ụkwụ",
+                "abụbà na-adapụ ngwa ngwa"
+            ],
+            "pcm": [
+                "neck weak",
+                "neck bend put for ground",
+                "feathers dey commot easy",
+                "paralyse"
+            ]
+        },
+        "escalation_words": [
+            "limp neck",
+            "paralysis",
+            "cannot move"
+        ],
+        "advice": {
+            "en": "Caused by toxins from rotting organic matter (dead birds, spoiled feed/water). Remove source of toxin immediately. Flush the flock's system with Epsom salts in water (1 lb per 100 gallons). Clean waterers thoroughly.",
+            "ha": "Kwayoyin cuta ne daga abubuwa da suka lalace (matattun kaji, lalacewar abinci/ruwa). Cire abin da ya lalace yanzu. Bada ruwan gishiri mai dumi ga kaji don wanke musu ciki. Wanke kwanonin ruwa sosai.",
+            "yo": "Ó máa ń wá láti inú àwọn ohun tó ti jẹrà (adìẹ tó ti kú, oúnjẹ/omi tó ti bàjẹ́). Mú ohun tó ń fà á kúrò lẹ́sẹ̀kẹsẹ̀. Fún wọn ní omi iyọ̀ díẹ̀ láti wẹ inú wọn. Fọ̀ àwọn ohun èlò omi dáadáa.",
+            "ig": "Ọ na-esi na ihe ndị rere ere (nnụnụ nwụrụ anwụ, nri/mmiri emebiri emebi). Wepụ ihe na-ebute ya ozugbo. Nye ha mmiri nnu iji sachaa afọ ha. Sachaa efere mmiri nke ọma.",
+            "pcm": "Na poison from rotten food, dirty water or dead birds wey dey ground. Commot di rubbish! Mix Epsom salt inside water make dem drink to wash dia belle. Clean dia place well well."
+        }
+    },
+    {
+        "id": "heat_stress",
+        "names": {
+            "en": "Heat Stress",
+            "ha": "Zafin Rana",
+            "yo": "Ooru Líkàngí",
+            "ig": "Okpomọkụ",
+            "pcm": "Heat Stress"
+        },
+        "severity": "HIGH",
+        "symptoms": {
+            "en": [
+                "panting",
+                "mouth open",
+                "wings spread",
+                "drinking lots of water",
+                "drop in egg production",
+                "sudden death in hot weather",
+                "hot body"
+            ],
+            "ha": [
+                "haki",
+                "bude baki",
+                "bude fuka-fuki",
+                "shan ruwa da yawa",
+                "mutuwar kwatsam da rana",
+                "zafin jiki"
+            ],
+            "yo": [
+                "híhà",
+                "ẹnu yíyà",
+                "ìyẹ́ títẹ́",
+                "mímu omi púpọ̀",
+                "ikú òjijì lọ́sàn-án",
+                "ara gbígbóná"
+            ],
+            "ig": [
+                "iku ume ọkụ ọkụ",
+                "ọnụ mepere emepe",
+                "nkù gbasaa",
+                "ịṅụ mmiri nke ukwuu",
+                "ọnwụ mberede n'ehihie",
+                "ahu ọkụ"
+            ],
+            "pcm": [
+                "dem dey pant",
+                "open mouth dey breathe",
+                "dem spread wings",
+                "too much hotness",
+                "drinking plenty water",
+                "dem just dey die for afternoon"
+            ]
+        },
+        "escalation_words": [
+            "dying from heat",
+            "panting heavily",
+            "sudden death"
+        ],
+        "advice": {
+            "en": "Provide cool, fresh water continuously. Add Vitamin C and electrolytes to the water. Do not feed during the hottest part of the day (12pm-4pm). Improve ventilation in the pen.",
+            "ha": "Saka ruwa mai sanyi a koda yaushe. Kara sinadarin Vitamin C a cikin ruwan. Kar ka bada abinci da tsakar rana (12pm-4pm). Bude kofofi da tagogi don samun iska.",
+            "yo": "Pèsè omi tútù nígbà gbogbo. Fún wọn ní Vitamin C sínú omi. Má ṣe fún wọn lóúnjẹ láàárín ọ̀sán gbàngbà (12pm-4pm). Jẹ́ kí atẹ́gùn wọlé dáadáa.",
+            "ig": "Nye ha mmiri oyi mgbe niile. Tinye Vitamin C n'ime mmiri ha. Enyela ha nri n'ehihie (12pm-4pm). Mee ka ikuku bata nke ọma n'ụlọ ha.",
+            "pcm": "Give dem fresh cold water plenty. Add Vitamin C and electrolytes inside water. No give dem feed around afternoon sun time (12-4pm). Make sure say breeze dey enter di pen well well."
+        }
+    },
+    {
+        "id": "aspergillosis",
+        "names": {
+            "en": "Aspergillosis (Brooder Pneumonia)",
+            "ha": "Cutar Numfashi ta Aspergillosis",
+            "yo": "Àrùn Mímí Aspergillosis",
+            "ig": "Ọrịa Ume Aspergillosis",
+            "pcm": "Brooder Pneumonia",
+            "sw": "Aspergillosis"
+        },
+        "severity": "MEDIUM",
+        "symptoms": {
+            "en": [
+                "gasping",
+                "rapid breathing",
+                "silent breathing",
+                "loss of appetite",
+                "sleepiness",
+                "moldy feed",
+                "moldy litter",
+                "respiratory distress",
+                "chicks dying"
+            ],
+            "ha": [
+                "wahalar numfashi",
+                "saurin numfashi",
+                "ciwon kaji",
+                "abinci mai m"
+            ],
+            "yo": [
+                "mímí yíyá",
+                "àìfẹ́ oúnjẹ",
+                "oorun",
+                "oúnjẹ kíkòó"
+            ],
+            "ig": [
+                "iku ume ọkụ ọkụ",
+                "enweghị agụụ",
+                "ụra",
+                "nri ebu"
+            ],
+            "pcm": [
+                "breathing fast",
+                "no appetite",
+                "sleep sleep",
+                "moldy feed",
+                "moldy wood finish",
+                "chicks dying quick"
+            ],
+            "sw": [
+                "kupumua haraka",
+                "kukosa hamu ya kula",
+                "usingizi"
+            ]
+        },
+        "advice": {
+            "en": "Caused by mold in feed or litter (wood shavings). REMOVE all moldy litter and feed immediately. Ensure good ventilation. Local remedy: Add a little apple cider vinegar to drinking water to inhibit fungal growth in the gut.",
+            "pcm": "Na mold inside dia feed or wood shavings dey cause am. REMOVE all the moldy feed and bed immediately. Open window well. Local remedy: Put small apple cider vinegar for dia water to fight the fungus.",
+            "ha": "Kyakkyawar datti ko abinci ne ke haddasawa. Cire duk wani abinci da datti mai m. Tabbatar da iska mai kyau.",
+            "yo": "Eérí tàbí oúnjẹ tó kòó ló ń fà á. Mú gbogbo rẹ̀ kúrò. Rí i pé àtẹgùn wọlé dáradára.",
+            "ig": "Ọ bụ ebu dị na nri ma ọ bụ ihe ndina na-ebute ya. Wepụ ihe niile nwere ebu ozugbo. Gbaa mbọ hụ na ikuku na-abata nke ọma."
+        },
+        "escalation_words": [
+            "moldy",
+            "mold",
+            "m",
+            "kíkòó",
+            "ebu",
+            "rapid breathing",
+            "gasping"
+        ]
+    },
+    {
+        "id": "crd_mycoplasmosis",
+        "names": {
+            "en": "Chronic Respiratory Disease (CRD)",
+            "ha": "Cutar Sanyi / CRD",
+            "yo": "Àrùn Òtútù CRD",
+            "ig": "Ọrịa Oyi CRD",
+            "pcm": "CRD (Cough and Catarrh)",
+            "sw": "CRD"
+        },
+        "severity": "MEDIUM",
+        "symptoms": {
+            "en": [
+                "swollen face",
+                "sneezing",
+                "coughing",
+                "nasal discharge",
+                "foamy eyes",
+                "snicking",
+                "reduced feed",
+                "poor growth",
+                "ammonia smell"
+            ],
+            "ha": [
+                "kumburin fuska",
+                "atishawa",
+                "tari",
+                "majina",
+                "kumfa a ido"
+            ],
+            "yo": [
+                "wíwú ojú",
+                "sísìn",
+                "ikọ́",
+                "ìmú ṣíṣàn",
+                "ojú omi"
+            ],
+            "ig": [
+                "ihu fụrụ akpụ",
+                "uzere",
+                "ụkwara",
+                "imi na-agbapụta",
+                "anya ụfụfụ"
+            ],
+            "pcm": [
+                "swollen face",
+                "sneezing",
+                "cough",
+                "catarrh",
+                "foam for eye",
+                "bad ammonia smell",
+                "breathing sound"
+            ],
+            "sw": [
+                "uso kuvimba",
+                "kupiga chafya",
+                "kukohoa",
+                "kutokwa na kamasi"
+            ]
+        },
+        "advice": {
+            "en": "Treat with antibiotics (Tylosin or Erythromycin). Improve ventilation and reduce ammonia (clean the pen). Local remedy: Boil garlic, ginger, and cayenne pepper and add the strained water to their drinking water to clear airways.",
+            "pcm": "Buy antibiotics like Tylosin. Open window make smell of ammonia commot (clean the pen). Local remedy: Boil garlic, ginger, and small pepper, put the water for dia drinking water to clear dia chest.",
+            "ha": "Yi magani da maganin rigakafi. Inganta shigar iska da rage warin kashi (wanke dakin).",
+            "yo": "Tọ́jú pẹ̀lú oògùn àrùn (Tylosin). Jẹ́ kí àtẹgùn wọlé dáradára kí o sì dín òórùn ìgbẹ́ kù.",
+            "ig": "Jiri ọgwụ nje gwọọ ya (Tylosin). Mee ka ikuku bata nke ọma ma belata ísí nsị ha."
+        },
+        "escalation_words": [
+            "foamy eyes",
+            "ammonia",
+            "swollen face",
+            "sneezing",
+            "catarrh"
+        ]
+    },
+    {
+        "id": "necrotic_enteritis",
+        "names": {
+            "en": "Necrotic Enteritis",
+            "ha": "Necrotic Enteritis",
+            "yo": "Necrotic Enteritis",
+            "ig": "Necrotic Enteritis",
+            "pcm": "Necrotic Enteritis",
+            "sw": "Necrotic Enteritis"
+        },
+        "severity": "HIGH",
+        "symptoms": {
+            "en": [
+                "severe diarrhea",
+                "foul-smelling stool",
+                "sudden increase in mortality",
+                "depression",
+                "ruffled feathers",
+                "dark brown stool"
+            ],
+            "ha": [
+                "zawo mai tsanani",
+                "zawo mai wari",
+                "mutuwar kwatsam"
+            ],
+            "yo": [
+                "ìgbẹ́ gbuuru",
+                "ìgbẹ́ tó ń rùn",
+                "ikú lójijì"
+            ],
+            "ig": [
+                "oke afọ ọsịsa",
+                "nsị na-esi ísí ọjọọ",
+                "ọnwụ mberede"
+            ],
+            "pcm": [
+                "bad diarrhea",
+                "smelling shit",
+                "birds dying fast",
+                "dark brown shit",
+                "depression"
+            ],
+            "sw": [
+                "kuharisha sana",
+                "kinyesi kinachonuka",
+                "kifo cha ghafla"
+            ]
+        },
+        "advice": {
+            "en": "Often follows Coccidiosis. Treat with Bacitracin or Penicillin in water. Remove dead birds quickly. Local remedy: Bitter leaf extract helps to cleanse the digestive system.",
+            "pcm": "E dey happen after Coccidiosis. Treat with antibiotics like Penicillin for water. Remove dead birds quick. Local remedy: Bitter leaf water fit help wash dia belle.",
+            "ha": "Yana biye da Coccidiosis. Yi magani da rigakafi. Cire matattun kaji da sauri.",
+            "yo": "O sábà máa ń tẹ̀lé Coccidiosis. Tọ́jú pẹ̀lú oògùn àrùn. Kó àwọn ẹyẹ tó ti kú kúrò kíákíá.",
+            "ig": "Ọ na-esochi Coccidiosis. Jiri ọgwụ nje gwọọ ya. Wepụ ọkụkọ nwụrụ anwụ ozugbo."
+        },
+        "escalation_words": [
+            "foul-smelling",
+            "dark brown stool",
+            "mortality",
+            "smelling shit"
+        ]
+    },
+    {
+        "id": "bumblefoot",
+        "names": {
+            "en": "Bumblefoot (Pododermatitis)",
+            "ha": "Ciwon Kafa (Bumblefoot)",
+            "yo": "Ọgbẹ́ Ẹsẹ̀",
+            "ig": "Ọnya Ụkwụ",
+            "pcm": "Bumblefoot",
+            "sw": "Bumblefoot"
+        },
+        "severity": "LOW",
+        "symptoms": {
+            "en": [
+                "swollen foot",
+                "black scab on footpad",
+                "limping",
+                "lameness",
+                "reluctance to walk",
+                "hard swelling on sole"
+            ],
+            "ha": [
+                "kumburin kafa",
+                "bakin tabo a tafin kafa",
+                "dingishi"
+            ],
+            "yo": [
+                "wíwú ẹsẹ̀",
+                "eépa dúdú lábẹ́ ẹsẹ̀",
+                "rírọ"
+            ],
+            "ig": [
+                "ụkwụ fụrụ akpụ",
+                "akpụkpọ ojii n'ọbụ ụkwụ",
+                "ịngwụrọ"
+            ],
+            "pcm": [
+                "swollen leg",
+                "black scab for foot",
+                "limping",
+                "bird no gree walk",
+                "swollen foot pad"
+            ],
+            "sw": [
+                "mguu kuvimba",
+                "kigaga cheusi kwenye wayo",
+                "kuchechemea"
+            ]
+        },
+        "advice": {
+            "en": "Caused by sharp objects or rough perches. Clean the wound, soak in warm salt water, apply iodine, and bandage. Ensure litter is soft and deep.",
+            "pcm": "Sharp object or bad wood dey cause am. Wash the wound, soak am inside warm salt water, put iodine and tie am. Make sure say dia bed soft.",
+            "ha": "Abubuwa masu kaifi ne ke kawowa. Wanke raunin, jika a ruwan dumi da gishiri, sa iodine.",
+            "yo": "Ohun mímú ló ń fà á. Fọ ọgbẹ́ náà, rẹ ẹ́ sínú omi iyọ̀ tó lọ́wọ́ọ́, fi oògùn sí i.",
+            "ig": "Ihe dị nkọ na-akpata ya. Saa ọnya ahụ, nye ya mmiri nnu ọkụ, tinye iodine."
+        },
+        "escalation_words": [
+            "limping",
+            "black scab",
+            "swollen foot",
+            "swollen leg"
+        ]
+    }
+]
