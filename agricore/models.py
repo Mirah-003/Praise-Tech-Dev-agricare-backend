@@ -14,6 +14,8 @@ class Farmer(models.Model):
         ('English','English'),
         ('Yoruba', 'Yoruba'),
         ('Hausa', 'Hausa'),
+        ('Igbo', 'Igbo'),
+        ('Pidgin', 'Nigerian Pidgin'),
     ])
 
     flock_size = models.IntegerField(default=0, help_text="Number of birds in the poultry form")
@@ -40,7 +42,7 @@ class Conversation(models.Model):
     Stores every message sent and received via WhatsApp/USSD
     Important for RAG context and audit logs.
     """
-    farmer = models.ForeignKey(Farmer, on_delete=models.CASCADE, related_name='conservations')
+    farmer = models.ForeignKey(Farmer, on_delete=models.CASCADE, related_name='conversations')
     message_text = models.TextField()
     sender_type = models.CharField(max_length=10, choices=[('Farmer', 'Farmer'), ('AI', 'AI'), ('Vet', 'Vet')])
     timestamp = models.DateTimeField(auto_now_add=True)

@@ -603,7 +603,15 @@
             "pcm": "VACCINATE with fowl pox vaccine. No special medicine. Give soft food and clean water. Birds fit recover in 2-3 weeks. Local remedy: Rub Palm oil wey dem mix with ash for the wound to make am dry.",
             "sw": "VACCINATE with fowl pox vaccine. No specific treatment. Provide soft food and clean water. Birds usually recover in 2-3 weeks."
         },
-        "escalation_words": []
+        "escalation_words": [
+            "scab",
+            "wart",
+            "pox",
+            "lesion",
+            "eye swollen",
+            "nodule",
+            "bumps on comb"
+        ]
     },
     {
         "id": "infectious_bronchitis",
@@ -1794,78 +1802,6 @@
         }
     },
     {
-        "id": "aspergillosis",
-        "names": {
-            "en": "Aspergillosis (Brooder Pneumonia)",
-            "ha": "Cutar Numfashi ta Aspergillosis",
-            "yo": "Àrùn Mímí Aspergillosis",
-            "ig": "Ọrịa Ume Aspergillosis",
-            "pcm": "Brooder Pneumonia",
-            "sw": "Aspergillosis"
-        },
-        "severity": "MEDIUM",
-        "symptoms": {
-            "en": [
-                "gasping",
-                "rapid breathing",
-                "silent breathing",
-                "loss of appetite",
-                "sleepiness",
-                "moldy feed",
-                "moldy litter",
-                "respiratory distress",
-                "chicks dying"
-            ],
-            "ha": [
-                "wahalar numfashi",
-                "saurin numfashi",
-                "ciwon kaji",
-                "abinci mai m"
-            ],
-            "yo": [
-                "mímí yíyá",
-                "àìfẹ́ oúnjẹ",
-                "oorun",
-                "oúnjẹ kíkòó"
-            ],
-            "ig": [
-                "iku ume ọkụ ọkụ",
-                "enweghị agụụ",
-                "ụra",
-                "nri ebu"
-            ],
-            "pcm": [
-                "breathing fast",
-                "no appetite",
-                "sleep sleep",
-                "moldy feed",
-                "moldy wood finish",
-                "chicks dying quick"
-            ],
-            "sw": [
-                "kupumua haraka",
-                "kukosa hamu ya kula",
-                "usingizi"
-            ]
-        },
-        "advice": {
-            "en": "Caused by mold in feed or litter (wood shavings). REMOVE all moldy litter and feed immediately. Ensure good ventilation. Local remedy: Add a little apple cider vinegar to drinking water to inhibit fungal growth in the gut.",
-            "pcm": "Na mold inside dia feed or wood shavings dey cause am. REMOVE all the moldy feed and bed immediately. Open window well. Local remedy: Put small apple cider vinegar for dia water to fight the fungus.",
-            "ha": "Kyakkyawar datti ko abinci ne ke haddasawa. Cire duk wani abinci da datti mai m. Tabbatar da iska mai kyau.",
-            "yo": "Eérí tàbí oúnjẹ tó kòó ló ń fà á. Mú gbogbo rẹ̀ kúrò. Rí i pé àtẹgùn wọlé dáradára.",
-            "ig": "Ọ bụ ebu dị na nri ma ọ bụ ihe ndina na-ebute ya. Wepụ ihe niile nwere ebu ozugbo. Gbaa mbọ hụ na ikuku na-abata nke ọma."
-        },
-        "escalation_words": [
-            "moldy",
-            "mold",
-            "m",
-            "kíkòó",
-            "ebu",
-            "rapid breathing",
-            "gasping"
-        ]
-    },
-    {
         "id": "crd_mycoplasmosis",
         "names": {
             "en": "Chronic Respiratory Disease (CRD)",
@@ -1938,130 +1874,6 @@
             "swollen face",
             "sneezing",
             "catarrh"
-        ]
-    },
-    {
-        "id": "necrotic_enteritis",
-        "names": {
-            "en": "Necrotic Enteritis",
-            "ha": "Necrotic Enteritis",
-            "yo": "Necrotic Enteritis",
-            "ig": "Necrotic Enteritis",
-            "pcm": "Necrotic Enteritis",
-            "sw": "Necrotic Enteritis"
-        },
-        "severity": "HIGH",
-        "symptoms": {
-            "en": [
-                "severe diarrhea",
-                "foul-smelling stool",
-                "sudden increase in mortality",
-                "depression",
-                "ruffled feathers",
-                "dark brown stool"
-            ],
-            "ha": [
-                "zawo mai tsanani",
-                "zawo mai wari",
-                "mutuwar kwatsam"
-            ],
-            "yo": [
-                "ìgbẹ́ gbuuru",
-                "ìgbẹ́ tó ń rùn",
-                "ikú lójijì"
-            ],
-            "ig": [
-                "oke afọ ọsịsa",
-                "nsị na-esi ísí ọjọọ",
-                "ọnwụ mberede"
-            ],
-            "pcm": [
-                "bad diarrhea",
-                "smelling shit",
-                "birds dying fast",
-                "dark brown shit",
-                "depression"
-            ],
-            "sw": [
-                "kuharisha sana",
-                "kinyesi kinachonuka",
-                "kifo cha ghafla"
-            ]
-        },
-        "advice": {
-            "en": "Often follows Coccidiosis. Treat with Bacitracin or Penicillin in water. Remove dead birds quickly. Local remedy: Bitter leaf extract helps to cleanse the digestive system.",
-            "pcm": "E dey happen after Coccidiosis. Treat with antibiotics like Penicillin for water. Remove dead birds quick. Local remedy: Bitter leaf water fit help wash dia belle.",
-            "ha": "Yana biye da Coccidiosis. Yi magani da rigakafi. Cire matattun kaji da sauri.",
-            "yo": "O sábà máa ń tẹ̀lé Coccidiosis. Tọ́jú pẹ̀lú oògùn àrùn. Kó àwọn ẹyẹ tó ti kú kúrò kíákíá.",
-            "ig": "Ọ na-esochi Coccidiosis. Jiri ọgwụ nje gwọọ ya. Wepụ ọkụkọ nwụrụ anwụ ozugbo."
-        },
-        "escalation_words": [
-            "foul-smelling",
-            "dark brown stool",
-            "mortality",
-            "smelling shit"
-        ]
-    },
-    {
-        "id": "bumblefoot",
-        "names": {
-            "en": "Bumblefoot (Pododermatitis)",
-            "ha": "Ciwon Kafa (Bumblefoot)",
-            "yo": "Ọgbẹ́ Ẹsẹ̀",
-            "ig": "Ọnya Ụkwụ",
-            "pcm": "Bumblefoot",
-            "sw": "Bumblefoot"
-        },
-        "severity": "LOW",
-        "symptoms": {
-            "en": [
-                "swollen foot",
-                "black scab on footpad",
-                "limping",
-                "lameness",
-                "reluctance to walk",
-                "hard swelling on sole"
-            ],
-            "ha": [
-                "kumburin kafa",
-                "bakin tabo a tafin kafa",
-                "dingishi"
-            ],
-            "yo": [
-                "wíwú ẹsẹ̀",
-                "eépa dúdú lábẹ́ ẹsẹ̀",
-                "rírọ"
-            ],
-            "ig": [
-                "ụkwụ fụrụ akpụ",
-                "akpụkpọ ojii n'ọbụ ụkwụ",
-                "ịngwụrọ"
-            ],
-            "pcm": [
-                "swollen leg",
-                "black scab for foot",
-                "limping",
-                "bird no gree walk",
-                "swollen foot pad"
-            ],
-            "sw": [
-                "mguu kuvimba",
-                "kigaga cheusi kwenye wayo",
-                "kuchechemea"
-            ]
-        },
-        "advice": {
-            "en": "Caused by sharp objects or rough perches. Clean the wound, soak in warm salt water, apply iodine, and bandage. Ensure litter is soft and deep.",
-            "pcm": "Sharp object or bad wood dey cause am. Wash the wound, soak am inside warm salt water, put iodine and tie am. Make sure say dia bed soft.",
-            "ha": "Abubuwa masu kaifi ne ke kawowa. Wanke raunin, jika a ruwan dumi da gishiri, sa iodine.",
-            "yo": "Ohun mímú ló ń fà á. Fọ ọgbẹ́ náà, rẹ ẹ́ sínú omi iyọ̀ tó lọ́wọ́ọ́, fi oògùn sí i.",
-            "ig": "Ihe dị nkọ na-akpata ya. Saa ọnya ahụ, nye ya mmiri nnu ọkụ, tinye iodine."
-        },
-        "escalation_words": [
-            "limping",
-            "black scab",
-            "swollen foot",
-            "swollen leg"
         ]
     }
 ]

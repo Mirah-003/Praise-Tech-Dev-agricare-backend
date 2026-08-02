@@ -20,6 +20,7 @@ from django.urls import path, include, re_path
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from agricore.views import WhatsAppWebhookView
 
 # openapi is what lets you define this custom information block:
 schema_view = get_schema_view(
@@ -40,6 +41,9 @@ urlpatterns = [
     path('', home),
     path('admin/', admin.site.urls),
     path('agricore/', include('agricore.urls')),
+
+    # Direct webhook path for Twilio
+    path('webhook/whatsapp/', WhatsAppWebhookView.as_view(), name='whatsapp_webhook_direct'),
 
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

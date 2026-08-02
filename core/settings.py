@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "fallback-key-for-local-dev-only")
 
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() in ("true", "1")
 
 ALLOWED_HOSTS = [
     'ripping-tibia-cannabis.ngrok-free.dev', 
@@ -37,7 +37,8 @@ ALLOWED_HOSTS = [
     ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://agricare-backend-9ino.onrender.com"
+    "https://agricare-backend-9ino.onrender.com",
+    "https://*.onrender.com",
 ]
 
 # Application definition
@@ -141,3 +142,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ],
 }
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

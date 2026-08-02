@@ -203,7 +203,7 @@ def process_message(farmer, incoming_msg, message_type="text", ai_func=None):
             farmer.save()
             return [
                 create_text_message("Thanks!\n\nI've analyzed the image."),
-                create_text_message("Possible condition: Coccidiosis\n\nCommon in young birds with diarrhea and weakness."),
+                create_text_message("⚠️ Demo Mode: Image analysis is illustrative.\n\nPossible condition: Coccidiosis\n\nCommon in young birds with diarrhea and weakness."),
                 create_button_message("Next Step", ["View Treatment Plan"])
             ]
         else:
@@ -251,7 +251,10 @@ def process_message(farmer, incoming_msg, message_type="text", ai_func=None):
     elif state == STATE_ASK_QUESTION:
         if ai_func:
             ai_response, is_high_risk = ai_func(farmer, incoming_msg)
-            return [create_text_message(ai_response)]
+            return [
+                create_text_message(ai_response),
+                create_text_message("💡 Type 'menu' to return to the main menu, or ask another question.")
+            ]
         else:
             return [create_text_message("I am processing your question...")]
 
