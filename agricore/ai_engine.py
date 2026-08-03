@@ -144,10 +144,16 @@ class AgricareAIEngine:
         }
 
         try:
-            response = requests.post(url, json=payload, timeout=15)
+            response = requests.post(url, json=payload, timeout=30)
             response.raise_for_status()
             data = response.json()
             raw_json_str = data["candidates"][0]["content"]["parts"][0]["text"].strip()
+
+            # Strip markdown code fences if present
+            if raw_json_str.startswith("```"):
+                raw_json_str = re.sub(r'^```(?:json)?\s*', '', raw_json_str)
+                raw_json_str = re.sub(r'\s*```$', '', raw_json_str)
+
             result = json.loads(raw_json_str)
             return {
                 "language": result.get("language", "en"),
