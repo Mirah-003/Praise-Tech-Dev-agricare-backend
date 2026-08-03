@@ -21,14 +21,17 @@ def get_ai_response(farmer, message_text):
     """
     Calls Agricare AI engine locally to get the poultry advisory response.
     """
-    context_msg = (
-        f"Context - Farmer Name: {farmer.name or 'Unknown'}, "
-        f"Bird Type: {farmer.bird_type or 'Unknown'}, "
-        f"Bird Age: {farmer.bird_age or 'Unknown'}, "
-        f"Flock Size: {farmer.flock_size or 'Unknown'}, "
-        f"Location: {farmer.location or 'Unknown'}.\n\n"
-        f"User's Question: {message_text}"
-    )
+    if "=== FARMER PROFILE ===" in message_text:
+        context_msg = message_text
+    else:
+        context_msg = (
+            f"Context - Farmer Name: {farmer.name or 'Unknown'}, "
+            f"Bird Type: {farmer.bird_type or 'Unknown'}, "
+            f"Bird Age: {farmer.bird_age or 'Unknown'}, "
+            f"Flock Size: {farmer.flock_size or 'Unknown'}, "
+            f"Location: {farmer.location or 'Unknown'}.\n\n"
+            f"User's Question: {message_text}"
+        )
 
     print(f"SECURE LOG: Sending request to internal Agricare AI Engine: '{message_text[:30]}...'")
     

@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [
     ]
 
 CSRF_TRUSTED_ORIGINS = [
+    "https://agricare-django-portal.onrender.com",
     "https://agricare-backend-9ino.onrender.com",
     "https://*.onrender.com",
 ]
