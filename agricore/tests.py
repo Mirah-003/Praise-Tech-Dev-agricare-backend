@@ -50,13 +50,11 @@ class ModelAndStateMachineTests(TestCase):
         self.assertEqual(self.farmer.name, "Musa")
 
     def test_emergency_fast_track(self):
-        # A new user reporting sick birds should bypass setup into conversation
         emergency_msg = "My broilers have bloody diarrhea and are dying fast"
         res = process_message(self.farmer, emergency_msg, ai_func=lambda f, c: ("Coccidiosis detected", True))
         self.farmer.refresh_from_db()
         self.assertEqual(self.farmer.conversation_state, STATE_CONVERSATION)
         self.assertTrue(self.farmer.is_onboarded)
-        # Verify a HealthCase was created
         self.assertEqual(HealthCase.objects.count(), 1)
         hc = HealthCase.objects.first()
         self.assertEqual(hc.farmer, self.farmer)
@@ -84,7 +82,7 @@ class AIEngineTests(TestCase):
         self.assertTrue(res["escalate"])
 
 
-class WebhookViewTests(TestCase):
+class WebhookAndUSSDViewTests(TestCase):
     def setUp(self):
         self.client = Client()
 
@@ -101,3 +99,64 @@ class WebhookViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(Farmer.objects.filter(phone_number="+2348099999999").exists())
         self.assertTrue(Conversation.objects.filter(sender_type="Farmer").exists())
+
+    def test_ussd_root_menu(self):
+        response = self.client.get("/webhook/ussd/", {
+            "sessionId": "test_sess_01",
+            "serviceCode": "*384*400#",
+            "phoneNumber": "+2348011112222",
+            "text": ""
+        })
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode("utf-8")
+        self.assertTrue(content.startswith("CON"))
+        self.assertIn("AGRICARE AI Poultry USSD", content)
+        self.assertIn("1. Quick Symptom Triage", content)
+
+    def test_ussd_symptom_triage_coccidiosis(self):
+        # User navigates: 1 (Symptom Triage) -> 1 (Bloody Diarrhea)
+        response = self.client.get("/webhook/ussd/", {
+            "sessionId": "test_sess_02",
+            "serviceCode": "*384*400#",
+            "phoneNumber": "+2348011112222",
+            "text": "1*1"
+        })
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode("utf-8")
+        self.assertTrue(content.startswith("END"))
+        self.assertIn("Likely Coccidiosis", content)
+        self.assertIn("Amprolium", content)
+        self.assertIn("DO NOT mix Vitamin B", content)
+
+    def test_ussd_climate_heat_stress(self):
+        # User selects option 2 (Climate Action)
+        response = self.client.get("/webhook/ussd/", {
+            "sessionId": "test_sess_03",
+            "serviceCode": "*384*400#",
+            "phoneNumber": "+2348011112222",
+            "text": "2"
+        })
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode("utf-8")
+        self.assertTrue(content.startswith("END"))
+        self.assertIn("Heat Stress Action", content)
+        self.assertIn("SDG 13", content)
+
+    def test_ussd_emergency_vet_call(self):
+        # User selects option 5 (Request Vet Call)
+        response = self.client.get("/webhook/ussd/", {
+            "sessionId": "test_sess_04",
+            "serviceCode": "*384*400#",
+            "phoneNumber": "+2348099887766",
+            "text": "5"
+        })
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode("utf-8")
+        self.assertTrue(content.startswith("END"))
+        self.assertIn("Emergency callback logged", content)
+        self.assertTrue(HealthCase.objects.filter(farmer__phone_number="+2348099887766").exists())
+
+    def test_ussd_simulator_page(self):
+        response = self.client.get("/ussd/simulator/")
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("AGRICARE AI • USSD Gateway", response.content.decode("utf-8"))

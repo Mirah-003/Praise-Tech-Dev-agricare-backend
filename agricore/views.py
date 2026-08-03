@@ -5,17 +5,20 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
 from django.http import HttpResponse
-from .models import Farmer, Conversation, HealthCase 
-import requests 
+from django.views import View
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
+from .models import Farmer, Conversation, HealthCase
+import requests
 import os
 import time
 from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
-
-
 from .ai_engine import engine as agricare_ai_engine
+
 
 def get_ai_response(farmer, message_text):
     """
@@ -44,12 +47,14 @@ def get_ai_response(farmer, message_text):
     
     return ai_text, is_high_risk
 
+
 from twilio.rest import Client
+
 
 class WhatsAppWebhookView(APIView):
     """
     FR-01: WhatsApp Conversational Advisory Interface.
-    Handles incoming messages from Twilio Sandbox
+    Handles incoming messages from Twilio WhatsApp Sandbox / Live Number.
     """
 
     @swagger_auto_schema(
@@ -59,7 +64,6 @@ class WhatsAppWebhookView(APIView):
         }
     )
     def post(self, request):
-        # Twilio sends form-encoded data
         body = request.data
         
         incoming_msg = body.get('Body', '').strip()
@@ -67,7 +71,6 @@ class WhatsAppWebhookView(APIView):
         profile_name = body.get('ProfileName', '')
         num_media = int(body.get('NumMedia', '0'))
         
-        # Determine message type
         if num_media > 0:
             incoming_msg = "[Image Uploaded]"
             msg_type = "image"
@@ -77,20 +80,16 @@ class WhatsAppWebhookView(APIView):
         if not from_number or not incoming_msg:
             return Response({"error": "Missing message or sender"}, status=status.HTTP_400_BAD_REQUEST)
             
-        # Strip "whatsapp:" if present in the from_number for internal storage, but keep it for replies
         db_phone = from_number.replace('whatsapp:', '')
 
-        print(f"SECURE LOG: Webhook Received from phone: {db_phone} (Sender Profile Name: '{profile_name}')")  
+        print(f"SECURE LOG: WhatsApp Webhook Received from phone: {db_phone} (Sender: '{profile_name}')")  
 
-        # get / create farmer (FR-11: Implicit onboarding) 
         farmer, created = Farmer.objects.get_or_create(phone_number=db_phone)
-
         if created or not farmer.name:
             if profile_name:
                 farmer.name = profile_name
                 farmer.save()
         
-        # Log Farmer's Message (FR-01: History Retention)
         Conversation.objects.create(
             farmer=farmer,
             message_text=incoming_msg,
@@ -98,11 +97,8 @@ class WhatsAppWebhookView(APIView):
         )
 
         from .state_machine import process_message
-
-        # We pass get_ai_response into the state machine for the Ask a Question state
         payloads_to_send = process_message(farmer, incoming_msg, message_type=msg_type, ai_func=get_ai_response)
 
-        # Deliver response(s) back to farmer via Twilio WhatsApp API
         account_sid = os.environ.get("TWILIO_ACCOUNT_SID")
         auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
         twilio_number = os.environ.get("TWILIO_WHATSAPP_NUMBER")
@@ -113,11 +109,8 @@ class WhatsAppWebhookView(APIView):
 
         client = Client(account_sid, auth_token)
 
-        # Send all payloads sequentially
         for partial_payload in payloads_to_send:
-            # Twilio doesn't use the JSON payload format, we just send text
             out_msg = partial_payload.get("text", {}).get("body", "[Text Message]")
-            
             try:
                 message = client.messages.create(
                     body=out_msg,
@@ -128,12 +121,502 @@ class WhatsAppWebhookView(APIView):
             except Exception as e:
                 print(f"ERROR: Failed to send Twilio message: {e}")
 
-            # Log AI response sent back
             Conversation.objects.create(
                 farmer=farmer,
                 message_text=out_msg,
                 sender_type='AI'
             )
 
-        # Twilio requires a 200 OK response
         return Response({"status": "success"}, status=status.HTTP_200_OK)
+
+
+class SMSWebhookView(APIView):
+    """
+    Twilio 2-Way SMS Webhook Receiver.
+    Allows smallholder farmers with standard basic feature phones (2G/SMS) to access Agricare AI.
+    """
+
+    @swagger_auto_schema(
+        operation_description="Twilio 2-Way SMS Webhook Receiver for basic feature phones.",
+        responses={
+            200: openapi.Response(description="SMS processed successfully")
+        }
+    )
+    def post(self, request):
+        body = request.data
+        incoming_msg = body.get('Body', '').strip()
+        from_number = body.get('From', '')
+
+        if not from_number or not incoming_msg:
+            return Response({"error": "Missing message or sender"}, status=status.HTTP_400_BAD_REQUEST)
+
+        db_phone = from_number.replace('whatsapp:', '')
+        farmer, _ = Farmer.objects.get_or_create(phone_number=db_phone)
+
+        Conversation.objects.create(
+            farmer=farmer,
+            message_text=incoming_msg,
+            sender_type='Farmer'
+        )
+
+        from .state_machine import process_message
+        payloads_to_send = process_message(farmer, incoming_msg, message_type='text', ai_func=get_ai_response)
+
+        account_sid = os.environ.get("TWILIO_ACCOUNT_SID")
+        auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
+        # Fallback to general twilio phone or whatsapp number stripped
+        twilio_sms_number = os.environ.get("TWILIO_PHONE_NUMBER", os.environ.get("TWILIO_WHATSAPP_NUMBER", "").replace("whatsapp:", ""))
+
+        if account_sid and auth_token and twilio_sms_number:
+            client = Client(account_sid, auth_token)
+            for p in payloads_to_send:
+                out_msg = p.get("text", {}).get("body", "[Text Message]")
+                try:
+                    client.messages.create(
+                        body=out_msg,
+                        from_=twilio_sms_number,
+                        to=from_number
+                    )
+                except Exception as e:
+                    print(f"ERROR: Failed to send Twilio SMS: {e}")
+
+                Conversation.objects.create(
+                    farmer=farmer,
+                    message_text=out_msg,
+                    sender_type='AI'
+                )
+
+        return Response({"status": "success"}, status=status.HTTP_200_OK)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class USSDWebhookView(View):
+    """
+    Standard GSM USSD Gateway Endpoint (Africa's Talking / Termii / Telco compliant).
+    Responds with CON (Continue Session) and END (Terminate Session) headers.
+    """
+
+    def get_data(self, request):
+        if request.method == 'POST':
+            return request.POST.dict() or getattr(request, 'data', {}) or {}
+        return request.GET.dict() or {}
+
+    def post(self, request, *args, **kwargs):
+        return self.handle_ussd(request)
+
+    def get(self, request, *args, **kwargs):
+        return self.handle_ussd(request)
+
+    def handle_ussd(self, request):
+        data = self.get_data(request)
+        
+        session_id = data.get("sessionId", f"sess_{int(time.time())}")
+        service_code = data.get("serviceCode", "*384*400#")
+        phone_number = data.get("phoneNumber", data.get("From", "+2348000000000"))
+        text = data.get("text", "").strip()
+
+        # Clean phone number
+        db_phone = phone_number.replace("whatsapp:", "")
+        farmer, _ = Farmer.objects.get_or_create(phone_number=db_phone)
+
+        # Parse user navigation path
+        inputs = text.split("*") if text else []
+
+        if len(inputs) == 0 or text == "":
+            # Level 0: Main Menu
+            response = (
+                "CON Welcome to AGRICARE AI Poultry USSD\n"
+                "1. Quick Symptom Triage\n"
+                "2. Heat Stress & Climate Action\n"
+                "3. Biosecurity & Litter Hygiene\n"
+                "4. Safe Herbal Remedies Guide\n"
+                "5. Request Emergency Vet Call\n"
+                "6. Update Farm Profile"
+            )
+        elif inputs[0] == "1":
+            if len(inputs) == 1:
+                # Level 1: Symptom Selection
+                response = (
+                    "CON Select Primary Bird Symptom:\n"
+                    "1. Bloody/Watery Diarrhea\n"
+                    "2. Coughing/Sneezing/Gasping\n"
+                    "3. Twisted Neck/Paralysis\n"
+                    "4. Swollen Face/Pox Scabs\n"
+                    "5. Sudden High Mortality"
+                )
+            else:
+                # Level 2: Symptom Diagnosis and Guidance
+                symptom_choice = inputs[1]
+                if symptom_choice == "1":
+                    response = (
+                        "END [RED] Likely Coccidiosis:\n"
+                        "1. Isolate sick flock immediately.\n"
+                        "2. Give Amprolium in clean water as ONLY drinking source per package label.\n"
+                        "3. Replace damp bedding.\n"
+                        "4. DO NOT mix Vitamin B during treatment."
+                    )
+                elif symptom_choice == "2":
+                    response = (
+                        "END [ORANGE] Likely CRD / Coryza:\n"
+                        "1. Improve coop ventilation & clean ammonia.\n"
+                        "2. Give Tylosin or Doxycycline per product label.\n"
+                        "3. Keep litter strictly dry."
+                    )
+                elif symptom_choice == "3":
+                    HealthCase.objects.create(
+                        farmer=farmer,
+                        symptoms_summary="Twisted neck / paralysis reported via USSD.",
+                        ai_preliminary_diagnosis="Suspected Newcastle / Gumboro (USSD Triage)",
+                        status="Pending",
+                        severity_score=9.0
+                    )
+                    response = (
+                        "END [CRITICAL] Suspected Newcastle/Gumboro:\n"
+                        "1. Quarantine flock immediately.\n"
+                        "2. Emergency vet alert triggered.\n"
+                        "3. Disinfect coop & restrict visitor access.\n"
+                        "4. Avoid moving or selling birds."
+                    )
+                elif symptom_choice == "4":
+                    response = (
+                        "END [YELLOW] Suspected Fowl Pox / Coryza:\n"
+                        "1. Paint unroofed scabs with iodine.\n"
+                        "2. Add multivitamins in drinking water.\n"
+                        "3. Spray coop to control mosquito vectors."
+                    )
+                elif symptom_choice == "5":
+                    HealthCase.objects.create(
+                        farmer=farmer,
+                        symptoms_summary="Sudden mass mortality reported via USSD.",
+                        ai_preliminary_diagnosis="Severe Acute Outbreak (USSD Triage)",
+                        status="Pending",
+                        severity_score=10.0
+                    )
+                    response = (
+                        "END [EMERGENCY] Severe Outbreak Alert:\n"
+                        "1. Stop all poultry sales immediately.\n"
+                        "2. Dispose of dead birds by deep burial (>1.5m) with lime.\n"
+                        "3. Extension veterinary officer notified."
+                    )
+                else:
+                    response = "END Invalid option selected. Please redial *384*400#."
+
+        elif inputs[0] == "2":
+            # Climate Action: Heat Stress Management
+            response = (
+                "END [SDG 13 - Heat Stress Action]:\n"
+                "1. Provide cool, clean water with electrolytes.\n"
+                "2. Increase cross-ventilation & reduce stocking density.\n"
+                "3. Feed flock only during cooler dawn & evening hours."
+            )
+
+        elif inputs[0] == "3":
+            # Biosecurity & Litter Hygiene
+            response = (
+                "END Biosecurity Protocol:\n"
+                "1. Maintain dry wood shavings (>2 inches depth).\n"
+                "2. Place disinfectant footbath at coop entrance.\n"
+                "3. Clean and disinfect drinkers daily."
+            )
+
+        elif inputs[0] == "4":
+            # Safe Herbal Remedies Guide
+            response = (
+                "END Herbal Guide:\n"
+                "Bitter leaf & Aloe vera extracts aid gut restoration ONLY AFTER synthetic medications are finished.\n"
+                "Never mix raw herbs into active pharmaceutical waters."
+            )
+
+        elif inputs[0] == "5":
+            # Emergency Vet Call Dispatch
+            HealthCase.objects.create(
+                farmer=farmer,
+                symptoms_summary=f"Farmer requested urgent callback via USSD session {session_id}.",
+                ai_preliminary_diagnosis="Emergency Vet Assistance Request (USSD)",
+                status="Pending",
+                severity_score=8.0
+            )
+            response = (
+                f"END Emergency callback logged for {farmer.phone_number}.\n"
+                "An agricultural extension officer or licensed vet will call you shortly."
+            )
+
+        elif inputs[0] == "6":
+            if len(inputs) == 1:
+                response = (
+                    "CON Select Your Primary Bird Type:\n"
+                    "1. Broilers (Meat)\n"
+                    "2. Layers (Eggs)\n"
+                    "3. Local / Cockerels\n"
+                    "4. Turkeys / Other"
+                )
+            else:
+                type_map = {"1": "Broilers", "2": "Layers", "3": "Local/Cockerels", "4": "Other"}
+                chosen = type_map.get(inputs[1], "Unknown")
+                farmer.bird_type = chosen
+                farmer.save()
+                response = f"END Farm profile updated: Primary flock set to {chosen}."
+        else:
+            response = "END Invalid selection. Redial *384*400# to access Agricare USSD."
+
+        # Return standard plain text response with CON/END prefix
+        return HttpResponse(response, content_type="text/plain; charset=utf-8")
+
+
+class USSDSimulatorView(View):
+    """
+    Interactive Web USSD Simulator for Examiners, Evaluators, and Developers.
+    Simulates a 2G feature phone dialing *384*400#.
+    """
+
+    def get(self, request):
+        html_content = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agricare AI - GSM USSD Feature Phone Simulator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b1320;
+            --phone-body: #1e293b;
+            --phone-bezel: #334155;
+            --screen-bg: #98bc88;
+            --screen-text: #11280d;
+            --btn-bg: #475569;
+            --btn-text: #f8fafc;
+            --accent: #22c55e;
+        }
+        body {
+            margin: 0;
+            padding: 20px;
+            background: var(--bg-color);
+            color: #f1f5f9;
+            font-family: 'Space Grotesk', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            color: var(--accent);
+            font-size: 26px;
+        }
+        .header p {
+            margin: 6px 0 0;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        .phone-wrapper {
+            background: var(--phone-body);
+            border: 4px solid var(--phone-bezel);
+            border-radius: 36px;
+            padding: 24px 20px;
+            width: 320px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.1);
+        }
+        .screen-container {
+            background: var(--screen-bg);
+            border: 3px solid #2d4024;
+            border-radius: 12px;
+            padding: 14px;
+            height: 220px;
+            box-shadow: inset 0 3px 6px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .screen-content {
+            font-family: 'VT323', monospace;
+            color: var(--screen-text);
+            font-size: 20px;
+            line-height: 1.25;
+            white-space: pre-wrap;
+            overflow-y: auto;
+            max-height: 160px;
+        }
+        .screen-input-row {
+            display: flex;
+            gap: 6px;
+            border-top: 1px dashed #425e36;
+            padding-top: 6px;
+        }
+        .screen-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--screen-text);
+            font-family: 'VT323', monospace;
+            font-size: 22px;
+            color: var(--screen-text);
+            outline: none;
+        }
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .key {
+            background: var(--btn-bg);
+            border: 1px solid #64748b;
+            border-radius: 12px;
+            color: var(--btn-text);
+            font-size: 18px;
+            font-weight: 700;
+            padding: 12px 0;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.1s ease;
+            user-select: none;
+        }
+        .key:active {
+            transform: scale(0.95);
+            background: var(--accent);
+            color: #000;
+        }
+        .key-action {
+            background: #3b82f6;
+            color: white;
+        }
+        .key-cancel {
+            background: #ef4444;
+            color: white;
+        }
+        .footer-note {
+            margin-top: 20px;
+            max-width: 480px;
+            text-align: center;
+            color: #64748b;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌾 AGRICARE AI • USSD Gateway</h1>
+        <p>Live GSM USSD Protocol Simulator (*384*400#)</p>
+    </div>
+
+    <div class="phone-wrapper">
+        <div class="screen-container">
+            <div class="screen-content" id="screenDisplay">Dial *384*400# to launch AGRICARE USSD advisory.</div>
+            <div class="screen-input-row" id="inputContainer" style="display: none;">
+                <input type="text" id="userInput" class="screen-input" placeholder="Type choice..." autocomplete="off">
+            </div>
+        </div>
+
+        <div class="keypad">
+            <button class="key" onclick="pressKey('1')">1</button>
+            <button class="key" onclick="pressKey('2')">2</button>
+            <button class="key" onclick="pressKey('3')">3</button>
+            <button class="key" onclick="pressKey('4')">4</button>
+            <button class="key" onclick="pressKey('5')">5</button>
+            <button class="key" onclick="pressKey('6')">6</button>
+            <button class="key" onclick="pressKey('7')">7</button>
+            <button class="key" onclick="pressKey('8')">8</button>
+            <button class="key" onclick="pressKey('9')">9</button>
+            <button class="key" onclick="pressKey('*')">*</button>
+            <button class="key" onclick="pressKey('0')">0</button>
+            <button class="key" onclick="pressKey('#')">#</button>
+            <button class="key key-action" onclick="sendInput()">SEND</button>
+            <button class="key" onclick="dialUSSD()">DIAL</button>
+            <button class="key key-cancel" onclick="resetUSSD()">END</button>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        <strong>Examiner Note:</strong> This interface communicates directly with the live Django <code>/webhook/ussd/</code> endpoint adhering to standard Africa's Talking & GSM Telco USSD specifications (<code>CON</code> / <code>END</code> protocols).
+    </div>
+
+    <script>
+        let accumulatedPath = "";
+        let isSessionActive = false;
+
+        function pressKey(num) {
+            const input = document.getElementById('userInput');
+            if (isSessionActive) {
+                input.value += num;
+            } else {
+                if (num === '*' || num === '#' || !isNaN(num)) {
+                    input.value += num;
+                }
+            }
+        }
+
+        async function queryEndpoint(path) {
+            try {
+                const response = await fetch(`/webhook/ussd/?phoneNumber=%2B2348012345678&serviceCode=*384*400%23&text=${encodeURIComponent(path)}`);
+                const text = await response.text();
+                return text;
+            } catch (err) {
+                return "END Error connecting to USSD gateway.";
+            }
+        }
+
+        async function dialUSSD() {
+            accumulatedPath = "";
+            isSessionActive = true;
+            document.getElementById('inputContainer').style.display = 'flex';
+            document.getElementById('userInput').value = '';
+            document.getElementById('userInput').focus();
+            
+            const raw = await queryEndpoint("");
+            renderResponse(raw);
+        }
+
+        async function sendInput() {
+            const val = document.getElementById('userInput').value.trim();
+            if (!val) return;
+
+            if (!isSessionActive) {
+                if (val.includes("*384*400#") || val === "*384#") {
+                    dialUSSD();
+                    return;
+                }
+            }
+
+            accumulatedPath = accumulatedPath ? `${accumulatedPath}*${val}` : val;
+            document.getElementById('userInput').value = '';
+            
+            const raw = await queryEndpoint(accumulatedPath);
+            renderResponse(raw);
+        }
+
+        function renderResponse(raw) {
+            const display = document.getElementById('screenDisplay');
+            if (raw.startsWith("CON ")) {
+                display.innerText = raw.substring(4);
+            } else if (raw.startsWith("END ")) {
+                display.innerText = raw.substring(4) + "\\n\\n[Session Terminated]";
+                isSessionActive = false;
+                document.getElementById('inputContainer').style.display = 'none';
+            } else {
+                display.innerText = raw;
+            }
+        }
+
+        function resetUSSD() {
+            accumulatedPath = "";
+            isSessionActive = false;
+            document.getElementById('inputContainer').style.display = 'none';
+            document.getElementById('userInput').value = '';
+            document.getElementById('screenDisplay').innerText = "Dial *384*400# to launch AGRICARE USSD advisory.";
+        }
+
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendInput();
+            }
+        });
+    </script>
+</body>
+</html>"""
+        return HttpResponse(html_content, content_type="text/html; charset=utf-8")
