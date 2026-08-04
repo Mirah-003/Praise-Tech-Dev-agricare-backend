@@ -1,5 +1,14 @@
 # Agricare AI Backend (Final Audit & Documentation)
 
+**Submission for:** Africa Agility Cohort 9 Hackathon  
+**Targeted SDG:** SDG 13 (Climate Action)  
+
+## 🚀 Live Demos
+- **Live Interactive USSD Simulator:** [https://agricare-django-portal.onrender.com/ussd/simulator/](https://agricare-django-portal.onrender.com/ussd/simulator/)
+- **Live API Endpoint:** [https://agricare-django-portal.onrender.com](https://agricare-django-portal.onrender.com)
+
+---
+
 This is the production-ready backend system for **Agricare AI**, an intelligent multi-channel advisory platform designed to help smallholder poultry farmers diagnose diseases instantly, manage climate-related heat stress, and get connected to veterinary help when needed.
 
 This repository represents the final, consolidated backend structure optimized for deployment on **Render**, completely independent of legacy endpoints like Railway or external HuggingFace dependencies.
