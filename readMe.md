@@ -71,6 +71,19 @@ This repository is pre-configured to deploy seamlessly on Render.com using the i
 - No Docker configuration is necessary for the web service.
 - **SQLite Database Warning:** The platform currently utilizes SQLite for rapid prototyping and hackathon purposes. For production at scale, Render allows easy attachment of a managed PostgreSQL instance by updating the `DATABASES` configuration in `core/settings.py`.
 
+## Credits and Contributions
+
+This project represents a collaborative merger between two original architectures:
+
+- **Backend Architecture (Praise-Tech-Dev / Teammates):** Full credit for the core foundational Django backend architecture, initial model definitions, database configuration, and basic routing goes to the original development team.
+- **Agricare AI Engine & Integrations (Hafsat Abdulhamid):** Full credit for the AI logic, clinical knowledge base, system integrations, and final platform connections. Specific, sole contributions include:
+  - Migrating and connecting the original `agricare-ai-engine` into the unified Django application.
+  - Designing and implementing the **Offline Clinical Knowledge Base** and AI Fallback logic.
+  - Developing the **Conversation State Machine** for multi-turn advisory.
+  - Implementing the **GSM USSD Gateway** and **Interactive Web Simulator**.
+  - Integrating the **Twilio SMS and WhatsApp Webhooks**.
+  - Enforcing the **SDG 13 (Climate Action)** heat stress protocols and **Clinical Safety Logic** (contraindications).
+
 ---
 
-*Note: This backend has been audited and cleaned to remove deprecated Railway references and heavy NLP endpoints, prioritizing speed, reliability, and low-bandwidth access across rural African telecom networks.*
+*Note: This repository has been audited and cleaned to remove deprecated Railway references and heavy NLP endpoints, prioritizing speed, reliability, and low-bandwidth access across rural African telecom networks.*
