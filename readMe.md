@@ -84,7 +84,7 @@ This repository is pre-configured to deploy seamlessly on Render.com using the i
 
 This project represents a collaborative merger between two original architectures:
 
-- **Backend Architecture (Praise-Tech-Dev / Teammates):** Full credit for the core foundational Django backend architecture, initial model definitions, database configuration, and basic routing goes to the original development team.
+- **Backend Architecture (Praise-Tech-Dev / [Ailee12/AGRICARE](https://github.com/Ailee12/AGRICARE)):** Full credit for the core foundational Django backend architecture, initial model definitions, database configuration, and basic routing goes to the original development team.
 - **Agricare AI Engine & Integrations (Hafsat Abdulhamid):** Full credit for the AI logic, clinical knowledge base, system integrations, and final platform connections. Specific, sole contributions include:
   - Migrating and connecting the original `agricare-ai-engine` into the unified Django application.
   - Designing and implementing the **Offline Clinical Knowledge Base** and AI Fallback logic.
