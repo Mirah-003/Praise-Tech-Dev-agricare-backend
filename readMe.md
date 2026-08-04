@@ -1,56 +1,76 @@
-# Agricare AI Backend
+# Agricare AI Backend (Final Audit & Documentation)
 
-This is the backend system for Agricare AI, a WhatsApp assistant designed to help smallholder poultry farmers diagnose bird diseases instantly and get connected to veterinary help when needed.
+This is the production-ready backend system for **Agricare AI**, an intelligent multi-channel advisory platform designed to help smallholder poultry farmers diagnose diseases instantly, manage climate-related heat stress, and get connected to veterinary help when needed.
 
-## How the Code Works
+This repository represents the final, consolidated backend structure optimized for deployment on **Render**, completely independent of legacy endpoints like Railway or external HuggingFace dependencies.
 
-The core of this system lives inside the agricore folder. Here is how the logic flows when a farmer sends a message:
+## Architecture Audit & Flow
 
-1. Incoming Request (views.py -> WhatsAppWebhookView)
-Twilio forwards the farmer's WhatsApp message to our POST webhook endpoint. The code extracts the phone number, the actual message body, and the farmer's WhatsApp profile name.
+The core system handles asynchronous requests through a centralized state machine across three main communication channels: WhatsApp, SMS, and GSM USSD.
 
-2. Automatic Registration (views.py -> Farmer model)
-The system checks if the phone number already exists in the database. If it is a new number, it automatically creates a new profile using their WhatsApp display name so they don't have to fill out an onboarding form.
+### 1. Unified Message Routing (`agricore/views.py`)
+- **Twilio WhatsApp Webhook (`/webhook/whatsapp/`)**: Processes incoming WhatsApp messages via Twilio, automatically registering new farmers using their WhatsApp profile names.
+- **Twilio SMS Webhook (`/webhook/sms/`)**: Handles 2-way SMS routing for farmers using 2G feature phones without WhatsApp.
+- **GSM USSD Gateway (`/webhook/ussd/` & `/ussd/`)**: Implements the official Africa's Talking / Telco GSM USSD protocol using strict `CON` (Continue) and `END` (Terminate) session states.
 
-3. AI Consultation (views.py -> get_ai_response)
-The system passes the farmer's message to a custom AI advisory API built by our AI team. It uses a retry loop (exponential backoff) to handle network timeouts safely.
+### 2. State Machine & Fallback AI (`agricore/state_machine.py`)
+All incoming requests are passed to `process_message()`, which manages context across multi-turn conversations:
+- **Offline Knowledge Base Integration**: Relies on a rigorously audited, localized JSON knowledge base (`knowledge_base.json`) containing clinical rules, eliminating dependence on fragile external LLM endpoints for primary triage.
+- **Urgent Triage (Red/Yellow Flags)**: If the system detects critical keywords (e.g., Newcastle, Coccidiosis, Acute Mortality), it bypasses normal conversation, instantly triggers a `HealthCase` escalation for human vets, and logs a high severity score (8.0 - 10.0).
 
-4. Urgent Triage (views.py -> HealthCase model)
-If the AI's response contains high-risk keywords like Newcastle, Coccidiosis, Gumboro, or an [URGENT] flag, the backend automatically flags the chat, creates a pending Health Case entry, and sets a high severity score. This pushes the case to an admin dashboard for human vets to take over.
+### 3. Clinical Safety & SDG-13 Enforcement
+- **Strict Dosing & Contraindications**: The system strictly separates herbal remedies (Aloe Vera, Bitter Leaf) from active pharmaceutical treatments (e.g., Amprolium). It explicitly prohibits mixing herbal extracts with synthetic drugs like Amprolium (which blocks Vitamin B1).
+- **Climate Action (SDG 13)**: Integrates actionable Heat Stress Management protocols (cooling, ventilation, feeding schedule adjustments) to combat climate-induced flock mortality.
 
-5. Twilio Response
-Finally, the view formats the AI's diagnostic text into standard TwiML XML and sends it back to Twilio to display as a reply on the farmer's WhatsApp screen.
+### 4. Interactive USSD Simulator (`/ussd/simulator/`)
+To facilitate testing and hackathon judging without requiring a physical Africa's Talking integration or African SIM card, a fully interactive **Web USSD Simulator** is built into the Django application. Navigating to this endpoint allows users to dial `*384*400#` directly in their browser.
 
 ## Project Structure
 
-* core/ : Contains the main project settings, configuration, and base URL routes.
-* agricore/ : Contains our app logic, including database models for Farmers, Conversations, and HealthCases, along with the webhook routing.
-* requirements.txt : List of all Python packages needed to run this project.
+- `core/`: Main project settings, middleware, and base URL routes.
+- `agricore/`: Core application logic containing database models (`Farmer`, `Conversation`, `HealthCase`), unified state machine, the offline fallback AI engine, and webhook views.
+- `requirements.txt`: Cleaned dependencies, specifically targeting Django, Twilio, and Render deployment requirements (Legacy HuggingFace/Transformers dependencies have been purged).
+- `render.yaml`: Infrastructure-as-Code configuration for automated seamless deployment to Render.
 
 ## Local Setup Instructions
 
-To get this backend running on your own computer, follow these steps:
+To run this backend on your local machine:
 
-1. Create a virtual environment and activate it:
-python -m venv venv
-.\venv\Scripts\Activate.ps1
+1. **Create and activate a virtual environment:**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use: .\venv\Scripts\Activate.ps1
+   ```
 
-2. Install the project requirements:
-pip install -r requirements.txt
+2. **Install requirements:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-3. Create a .env file in the root folder (where manage.py is) and add your keys:
-AI_API_KEY=your_actual_ai_api_key
-WHATSAPP_VERIFY_TOKEN=your_secret_handshake_token
-SECRET_KEY=your_actual_secret_key
+3. **Configure Environment Variables:**
+   Create a `.env` file in the root folder alongside `manage.py`:
+   ```ini
+   AI_API_KEY=your_actual_ai_api_key
+   SECRET_KEY=your_django_secret_key
+   ```
 
-4. Run the database migrations:
-python manage.py migrate
+4. **Run Migrations & Tests:**
+   ```bash
+   python manage.py migrate
+   python manage.py test  # Runs the 14 comprehensive unit tests
+   ```
 
-5. Start the development server:
-python manage.py runserver
+5. **Start the Development Server:**
+   ```bash
+   python manage.py runserver
+   ```
 
-Once the server is running, you can view the complete interactive API layout by navigating to http://127.0.0.1:8000/swagger/ in your web browser.
+## Production Deployment (Render)
+
+This repository is pre-configured to deploy seamlessly on Render.com using the included `render.yaml`. 
+- No Docker configuration is necessary for the web service.
+- **SQLite Database Warning:** The platform currently utilizes SQLite for rapid prototyping and hackathon purposes. For production at scale, Render allows easy attachment of a managed PostgreSQL instance by updating the `DATABASES` configuration in `core/settings.py`.
 
 ---
 
-*Note: This backend is a fork of the original [Praise-Tech-Dev/agricare-backend](https://github.com/Praise-Tech-Dev/agricare-backend) repository. Full credit for the core backend architecture goes to the original development team.*
+*Note: This backend has been audited and cleaned to remove deprecated Railway references and heavy NLP endpoints, prioritizing speed, reliability, and low-bandwidth access across rural African telecom networks.*
